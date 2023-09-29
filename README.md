@@ -26,4 +26,5 @@ Features:
 13. Update profile
 14. Delete profile
 15. User profile
-16. Favoritessimilar pets
+16. Favorites
+17. Similar pets
