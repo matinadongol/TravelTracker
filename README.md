@@ -1,10 +1,10 @@
 Group name: Group 4 - grp_4
 
 Group Members:
-Tanya Marion Mayol
-Pranav Malhotra
-Aman Kumar Giri
-Matina Dongol
+1. Tanya Marion Mayol
+2. Pranav Malhotra
+3. Aman Kumar Giri
+4. Matina Dongol
 
 App name: Pedopt
 
