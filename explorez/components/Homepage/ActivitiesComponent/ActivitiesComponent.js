@@ -1,12 +1,12 @@
 import {View, StyleSheet} from "react-native"
 import TripsComponent from "./TripsComponent/TripsComponent"
-import OngoingComponent from "./OngoingComponent/OngoingComponent"
+import UpcomingComponent from "./UpcomingComponent/UpcomingComponent"
 
 const ActivitiesComponent = () => {
     return (
         <View style={Styles.container}>
             <TripsComponent/>
-            <OngoingComponent/>
+            <UpcomingComponent/>
         </View>
     )
 }

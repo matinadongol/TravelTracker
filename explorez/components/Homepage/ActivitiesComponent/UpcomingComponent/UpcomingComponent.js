@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, ScrollView} from "react-native"
 import { useFonts } from "expo-font"
 
 
-const OngoingComponent = () => {
+const UpcomingComponent = () => {
     let [fontLoaded] = useFonts({
         'bai': require('../../../../assets/fonts/BaiJamjuree-Bold.ttf')
     })
@@ -13,7 +13,7 @@ const OngoingComponent = () => {
 
     return (
         <View style={Styles.container}>
-            <Text style={Styles.ongoingTxt}>Ongoing</Text>
+            <Text style={Styles.upcomingTxt}>UPCOMING</Text>
             <ScrollView>
                 
             </ScrollView>
@@ -26,7 +26,7 @@ const Styles = StyleSheet.create({
         marginTop:20,
         paddingBottom:25,
     },
-    ongoingTxt:{
+    upcomingTxt:{
         fontFamily:'bai',
         fontSize:19,
         color:'black',
@@ -34,4 +34,4 @@ const Styles = StyleSheet.create({
     }
 })
 
-export default OngoingComponent
+export default UpcomingComponent
