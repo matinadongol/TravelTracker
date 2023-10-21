@@ -1,8 +1,10 @@
 import {View, Text, StyleSheet, Pressable} from "react-native"
 import { useFonts } from "expo-font"
-
+import { useNavigation } from '@react-navigation/native';
 
 const TripsComponent = () => {
+    const navigation = useNavigation();
+
     let [fontLoaded] = useFonts({
         'bai': require('../../../../assets/fonts/BaiJamjuree-Bold.ttf')
     })
@@ -11,11 +13,15 @@ const TripsComponent = () => {
         return null
     } 
 
+    const handleAddPress = () => {
+        navigation.navigate('NewTrip');
+    }
+
     return (
         <View style={Styles.container}>
             <Text style={Styles.tripsTxt}>TRIPS</Text>
             <View style={Styles.buttonsContainer}>
-                <Pressable style={Styles.pressableAdd}>
+                <Pressable style={Styles.pressableAdd} onPress={handleAddPress}>
                     <Text style={Styles.text}>Add New</Text>
                 </Pressable>
                 <Pressable style={Styles.pressableComp}>

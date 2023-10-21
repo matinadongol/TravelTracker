@@ -1,6 +1,7 @@
 import {View, StyleSheet} from "react-native"
 import TripsComponent from "./TripsComponent/TripsComponent"
 import UpcomingComponent from "./UpcomingComponent/UpcomingComponent"
+import NewTrip from "./TripsComponent/NewTrip"
 
 const ActivitiesComponent = () => {
     return (
