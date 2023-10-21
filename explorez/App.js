@@ -17,10 +17,7 @@ export default function App() {
         <Stack.Screen name="NewTrip" component={NewTrip} 
           options={{
             headerStyle: {
-              backgroundColor: '#273835', // Set the background color here
-            },
-            headerTitle: {
-            
+              backgroundColor: '#273835',
             },
             headerTintColor: '#fff', // Set the text color here
           }}
