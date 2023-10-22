@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         padding: 20
     },
     upcomingListDestination:{
-        fontSize: '25',
+        fontSize: 25,
         fontWeight: '500',
         marginBottom: 3
     }

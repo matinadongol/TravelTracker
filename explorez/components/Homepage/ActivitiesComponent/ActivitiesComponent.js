@@ -1,7 +1,11 @@
 import {View, StyleSheet} from "react-native"
 import TripsComponent from "./TripsComponent/TripsComponent"
 import UpcomingComponent from "./UpcomingComponent/UpcomingComponent"
+import TripDetail from "./UpcomingComponent/TripDetailComponent/TripDetail"
 import NewTrip from "./TripsComponent/NewTrip"
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 const ActivitiesComponent = () => {
     return (

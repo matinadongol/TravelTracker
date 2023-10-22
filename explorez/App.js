@@ -4,6 +4,8 @@ import Homepage from './components/Homepage/Homepage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import NewTrip from './components/Homepage/ActivitiesComponent/TripsComponent/NewTrip';
+import UpcomingComponent from './components/Homepage/ActivitiesComponent/UpcomingComponent/UpcomingComponent';
+import TripDetail from './components/Homepage/ActivitiesComponent/UpcomingComponent/TripDetailComponent/TripDetail';
 
 const Stack = createStackNavigator();
 
@@ -19,9 +21,21 @@ export default function App() {
             headerStyle: {
               backgroundColor: '#273835',
             },
-            headerTintColor: '#fff', // Set the text color here
+            headerTintColor: '#fff', 
           }}
         />
+        <Stack.Screen name="UpcomingComponent" component={UpcomingComponent} 
+          options={{
+            headerStyle: {
+              backgroundColor: '#273835',
+            },
+            headerTintColor: '#fff', 
+          }}
+        />
+        <Stack.Screen name="TripDetail">
+          {(props) => <TripDetail {...props} />}
+        </Stack.Screen>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
