@@ -3,16 +3,17 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import * as database from '../../../../database';
 import { useNavigation } from '@react-navigation/native';
 import styles from './Styles'; // Import the styles from the styles.js file
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const TripDetail = ({ route }) => {
   const navigation = useNavigation();
   const { item } = route.params;
   const [editedDestination, setEditedDestination] = useState(item.destination);
   const [editedNotes, setEditedNotes] = useState(item.notes);
-  const [editedStartDate, setEditedStartDate] = useState(item.startDate);
-  const [editedEndDate, setEditedEndDate] = useState(item.endDate);
   const [editedTripName, setEditedTripName] = useState(item.tripName);
   const [editedTripTag, setEditedTripTag] = useState(item.tripTag);
+  const [arrivalDate, setArrivalDate] = useState(new Date());
+  const [departureDate, setDepartureDate] = useState(new Date());
 
   const handleUpdate = async () => {
     if (!item.id) {
@@ -22,8 +23,8 @@ const TripDetail = ({ route }) => {
     const updatedData = {
       destination: editedDestination,
       notes: editedNotes,
-      startDate: editedStartDate,
-      endDate: editedEndDate,
+      startDate: departureDate,
+      endDate: arrivalDate,
       tripName: editedTripName,
       tripTag: editedTripTag,
     };
@@ -54,18 +55,44 @@ const TripDetail = ({ route }) => {
           onChangeText={setEditedDestination}
           value={editedDestination}
         />
-        <Text style={[styles.text, styles.heading]}>Date of Departure: </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEditedStartDate}
-          value={editedStartDate}
-        />
-        <Text style={[styles.text, styles.heading]}>Date of Arrival: </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEditedEndDate}
-          value={editedEndDate}
-        />
+        
+        <View style={styles.datePickerRow}>
+          <View style={styles.datePickerLabelContainer}>
+            <Text style={[styles.text, styles.heading]}>Date of Departure:</Text>
+          </View>
+          <View style={styles.datePicker}>
+            <DateTimePicker
+              value={departureDate}
+              mode="date"
+              display="default"
+              onChange={(event, date) => {
+                if (event.type === 'set') {
+                  setDepartureDate(date);
+                }
+              }}
+              style={styles.dateTimePicker}
+            />
+          </View>
+        </View>
+        
+        <View style={styles.datePickerRow}>
+          <View style={styles.datePickerLabelContainer}>
+            <Text style={[styles.text, styles.heading]}>Date of Arrival:</Text>
+          </View>
+          <View style={styles.datePicker}>
+            <DateTimePicker
+              value={arrivalDate}
+              mode="date"
+              display="default"
+              onChange={(event, date) => {
+                if (event.type === 'set') {
+                  setArrivalDate(date);
+                }
+              }}
+              style={styles.dateTimePicker}
+            />
+          </View>
+        </View>
         <Text style={[styles.text, styles.heading]}>Occasion: </Text>
         <TextInput
           style={styles.input}
@@ -86,14 +113,14 @@ const TripDetail = ({ route }) => {
         />
       </View>
       <Pressable
-  style={({ pressed }) => [
-    styles.updateButton,
-    pressed ? styles.updateButtonPressed : null,
-  ]}
-  onPress={handleUpdate}
->
-  <Text style={styles.buttonText}>UPDATE</Text>
-</Pressable>
+        style={({ pressed }) => [
+          styles.updateButton,
+          pressed ? styles.updateButtonPressed : null,
+        ]}
+        onPress={handleUpdate}
+      >
+        <Text style={styles.buttonText}>UPDATE</Text>
+      </Pressable>
     </View>
   );
 };

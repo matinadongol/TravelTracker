@@ -33,6 +33,26 @@ const styles = StyleSheet.create({
     marginTop: 15,
     
   },
+  datePickerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  datePickerLabelContainer: {
+    flex: 0.7,
+  },
+  datePicker: {
+    backgroundColor: '#d8f5f4',
+    flex: 0,
+    width: 118,
+    borderRadius: 9,
+  },
+  datePickerContainer: {
+    flexDirection: 'row',
+  alignItems: 'left',
+  justifyContent: 'left',
+  backgroundColor: 'white',
+  },  
   updateButtonPressed: {
     backgroundColor: '#A9C2D7',
     borderWidth: 2,
