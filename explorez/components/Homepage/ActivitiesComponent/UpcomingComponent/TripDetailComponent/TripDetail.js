@@ -64,7 +64,7 @@ const TripDetail = ({ route }) => {
   if (!item) {
     return (
       <View style={styles.container}>
-        <Text>No item data available.</Text>
+        <Text>Travel data not available.</Text>
       </View>
     );
   }
@@ -82,13 +82,13 @@ const TripDetail = ({ route }) => {
 
         <Pressable onPress={() => showDatePicker('departure')}>
           <Text style={[styles.text, styles.heading]}>
-            Date of Departure: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()}
+            Departure Date: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()}
           </Text>
         </Pressable>
 
         <Pressable onPress={() => showDatePicker('arrival')}>
           <Text style={[styles.text, styles.heading]}>
-            Date of Arrival: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()}
+            Arrival Date: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()}
           </Text>
         </Pressable>
 
