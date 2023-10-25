@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable } from 'react-native';
 import * as database from '../../../../database';
 import { useNavigation } from '@react-navigation/native';
-import styles from './Styles'; // Import the styles from the styles.js file
-import DateTimePicker from "@react-native-community/datetimepicker";
+import styles from './Styles';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const TripDetail = ({ route }) => {
   const navigation = useNavigation();
@@ -12,19 +12,43 @@ const TripDetail = ({ route }) => {
   const [editedNotes, setEditedNotes] = useState(item.notes);
   const [editedTripName, setEditedTripName] = useState(item.tripName);
   const [editedTripTag, setEditedTripTag] = useState(item.tripTag);
-  const [arrivalDate, setArrivalDate] = useState(new Date());
-  const [departureDate, setDepartureDate] = useState(new Date());
+  const [arrivalDate, setArrivalDate] = useState(new Date(item.endDate));
+  const [departureDate, setDepartureDate] = useState(new Date(item.startDate));
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = (dateType) => {
+    setDatePickerVisibility(true);
+    setDatePickerMode(dateType);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleDateConfirm = (selectedDate) => {
+    if (datePickerMode === 'departure') {
+      setDepartureDate(selectedDate);
+    } else if (datePickerMode === 'arrival') {
+      setArrivalDate(selectedDate);
+    }
+    hideDatePicker();
+  };
+
+  const [datePickerMode, setDatePickerMode] = useState(null);
 
   const handleUpdate = async () => {
     if (!item.id) {
       console.error('Invalid item ID');
       return;
     }
+    const updatedDepartureDate = departureDate.getFullYear() + "-" + (departureDate.getMonth()+1) + "-" + (departureDate.getDate())
+    const updatedArrivalDate = arrivalDate.getFullYear() + "-" + (arrivalDate.getMonth()+1) + "-" + (arrivalDate.getDate())
     const updatedData = {
       destination: editedDestination,
       notes: editedNotes,
-      startDate: departureDate,
-      endDate: arrivalDate,
+      startDate: updatedDepartureDate,
+      endDate: updatedArrivalDate,
       tripName: editedTripName,
       tripTag: editedTripTag,
     };
@@ -55,44 +79,19 @@ const TripDetail = ({ route }) => {
           onChangeText={setEditedDestination}
           value={editedDestination}
         />
-        
-        <View style={styles.datePickerRow}>
-          <View style={styles.datePickerLabelContainer}>
-            <Text style={[styles.text, styles.heading]}>Date of Departure:</Text>
-          </View>
-          <View style={styles.datePicker}>
-            <DateTimePicker
-              value={departureDate}
-              mode="date"
-              display="default"
-              onChange={(event, date) => {
-                if (event.type === 'set') {
-                  setDepartureDate(date);
-                }
-              }}
-              style={styles.dateTimePicker}
-            />
-          </View>
-        </View>
-        
-        <View style={styles.datePickerRow}>
-          <View style={styles.datePickerLabelContainer}>
-            <Text style={[styles.text, styles.heading]}>Date of Arrival:</Text>
-          </View>
-          <View style={styles.datePicker}>
-            <DateTimePicker
-              value={arrivalDate}
-              mode="date"
-              display="default"
-              onChange={(event, date) => {
-                if (event.type === 'set') {
-                  setArrivalDate(date);
-                }
-              }}
-              style={styles.dateTimePicker}
-            />
-          </View>
-        </View>
+
+        <Pressable onPress={() => showDatePicker('departure')}>
+          <Text style={[styles.text, styles.heading]}>
+            Date of Departure: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()}
+          </Text>
+        </Pressable>
+
+        <Pressable onPress={() => showDatePicker('arrival')}>
+          <Text style={[styles.text, styles.heading]}>
+            Date of Arrival: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()}
+          </Text>
+        </Pressable>
+
         <Text style={[styles.text, styles.heading]}>Occasion: </Text>
         <TextInput
           style={styles.input}
@@ -121,6 +120,13 @@ const TripDetail = ({ route }) => {
       >
         <Text style={styles.buttonText}>UPDATE</Text>
       </Pressable>
+          
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleDateConfirm}
+        onCancel={hideDatePicker}
+      />
     </View>
   );
 };

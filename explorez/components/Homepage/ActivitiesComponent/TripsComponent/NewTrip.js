@@ -3,17 +3,23 @@ import {View, StyleSheet, Text, TextInput, Pressable, ActivityIndicator, Keyboar
 import {Picker} from '@react-native-picker/picker';
 import * as database from '../../../database';
 import { useState } from 'react';
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const NewTrip = () => {
+    const today = new Date();
+
     const [loading, setLoading] = useState(false);
     const [tripName, setTripName] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    
     const [destination, setDestination] = useState('');
     const [tripTag, setTripTag] = useState("Leisure");
     const [notes, setNotes] = useState('');
     const [containerStyle, setContainerStyle] = useState(Styles.container);
     const [isTextInputFocused, setIsTextInputFocused] = useState(false);
+    const [startDate, setStartDate] = useState(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    const [endDate, setEndDate] = useState(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
     
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -72,6 +78,39 @@ const NewTrip = () => {
         }
     }
 
+    const handleStartDateChange = (event, selectedDate) => {
+        setShowStartPicker(false);
+        const dateObject = new Date(selectedDate);
+        if (selectedDate !== undefined) {
+            const month = selectedDate.getMonth() + 1; // Months are zero-indexed
+            const day = selectedDate.getDate();
+            const year = selectedDate.getFullYear();
+            const date = year+ "-" + month + "-"  + day
+            setStartDate(date.toString());
+        }
+    };
+    
+    const showStartDatePicker = () => {
+        setShowStartPicker(true);
+      };
+    
+      const showEndDatePicker = () => {
+        setShowEndPicker(true);
+      };
+
+    const handleEndDateChange = (event, selectedDate) => {
+        setShowEndPicker(false);
+    
+        if (selectedDate !== undefined) {
+            const month = selectedDate.getMonth() + 1; 
+            const day = selectedDate.getDate();
+            const year = selectedDate.getFullYear();
+            const date = year+ "-" + month + "-"  + day
+            setEndDate(date.toString());
+        }
+      };
+    
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView
@@ -90,19 +129,33 @@ const NewTrip = () => {
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="Start Date *"
-                    onChangeText={text => setStartDate(text)}
-                    value={startDate}
+                    value={startDate.toString()}
                     style={Styles.inputText}
-
+                    onFocus={showStartDatePicker}
                 />
+                {showStartPicker && (
+                    <DateTimePicker
+                        value={startDate}
+                        mode="date"
+                        display="default"
+                        onChange={handleStartDateChange}
+                    />)}
             </View>
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="End Date"
-                    onChangeText={text => setEndDate(text)}
-                    value={endDate}
+                    value={endDate.toString()}
                     style={Styles.inputText}
+                    onFocus={showEndDatePicker}
                 />
+                {showEndPicker && (
+                    <DateTimePicker
+                        // testID="dateTimePicker"
+                        value={endDate}
+                        mode="date"
+                        display="default"
+                        onChange={handleEndDateChange}
+                    />)}
             </View>
             <View style={Styles.inputContainer}>
                 <TextInput
