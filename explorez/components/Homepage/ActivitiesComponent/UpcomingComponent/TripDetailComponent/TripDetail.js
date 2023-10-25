@@ -64,7 +64,7 @@ const TripDetail = ({ route }) => {
   if (!item) {
     return (
       <View style={styles.container}>
-        <Text>No item data available</Text>
+        <Text>No item data available.</Text>
       </View>
     );
   }
