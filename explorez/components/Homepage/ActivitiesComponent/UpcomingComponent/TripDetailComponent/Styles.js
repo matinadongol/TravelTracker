@@ -1,6 +1,29 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  editDeleteButtons: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    padding: 20,
+    marginHorizontal: 50
+  },
+  editButton: {
+    backgroundColor: '#00AF22',
+    width: 100,
+    padding: 10,
+    alignItems: 'center'
+  },
+  editButtonText: {
+    color: "#fff",
+    fontSize: 20
+  },
+  deleteButton: {
+    backgroundColor: '#4d4d4d',
+    width: 100,
+    padding: 10,
+    alignItems: 'center'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

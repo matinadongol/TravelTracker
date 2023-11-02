@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './Styles';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Alert } from 'react-native';
 
 const TripDetail = ({ route }) => {
   const navigation = useNavigation();
@@ -64,6 +65,27 @@ const TripDetail = ({ route }) => {
     }
   };
 
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Item',
+      'Are you sure you want to delete this item?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: () => {
+            database.remove(item.id);
+            navigation.navigate('Homepage');
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
   const EditEnabled = () => {
     setIsInputEnabled(!isInputEnabled);
     setIsButtonVisible(!isButtonVisible)
@@ -80,16 +102,12 @@ const TripDetail = ({ route }) => {
   return (
     <>
     <View style={styles.editDeleteButtons}>
-    <Pressable
-        style={({ pressed }) => [
-          styles.updateButton,
-          pressed ? styles.updateButtonPressed : null,
-        ]}
-        onPress={EditEnabled}
-      >
-        <Icon name="edit" size={30} color="#000" />
+      <Pressable onPress={EditEnabled} style={styles.editButton}>
+          <Text style={styles.editButtonText}>Edit</Text>
       </Pressable>
-        
+      <Pressable onPress={handleDelete} style={styles.deleteButton}>
+      <Text style={styles.editButtonText}>Delete</Text>
+      </Pressable> 
     </View>
     <View style={styles.container}>
       <Text style={styles.title}>Trip Details</Text>
@@ -102,13 +120,13 @@ const TripDetail = ({ route }) => {
           editable={isInputEnabled}
         />
 
-        <Pressable onPress={() => showDatePicker('departure')}>
+        <Pressable onPress={() => showDatePicker ('departure')} disabled={!isButtonVisible}>
           <Text style={[styles.text, styles.heading]}>
             Departure Date: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()} 
           </Text>
         </Pressable>
 
-        <Pressable onPress={() => showDatePicker('arrival')}>
+        <Pressable onPress={() => showDatePicker('arrival')} disabled={!isButtonVisible}>
           <Text style={[styles.text, styles.heading]}>
             Arrival Date: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()} 
           </Text>
