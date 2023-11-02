@@ -22,6 +22,7 @@ export default function App() {
               backgroundColor: '#273835',
             },
             headerTintColor: '#fff', 
+            title: 'New Trip'
           }}
         />
         <Stack.Screen name="UpcomingComponent" component={UpcomingComponent} 
@@ -32,7 +33,9 @@ export default function App() {
             headerTintColor: '#fff', 
           }}
         />
-        <Stack.Screen name="TripDetail">
+        <Stack.Screen name="TripDetail" options={{headerStyle: {
+              backgroundColor: '#273835',
+            },title: 'Edit Trip', headerTintColor: '#fff',}}>
           {(props) => <TripDetail {...props} />}
         </Stack.Screen>
 

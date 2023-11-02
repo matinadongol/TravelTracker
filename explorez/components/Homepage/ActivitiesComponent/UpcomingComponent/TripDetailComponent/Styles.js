@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   input: {
-    fontFamily:'bai',
+    fontFamily:'Bai-Jamjuree',
     height: 40,
     borderColor: '#d8f5f4',
     borderWidth: 2,
@@ -28,10 +28,12 @@ const styles = StyleSheet.create({
   },
   
   updateButton: {
-    backgroundColor: '#273835',
-    padding: 12,
+    width:'30%',
+    backgroundColor: '#00AF22',
+    padding: 10,
     borderRadius: 10,
-    marginTop: 15,
+    borderColor:'#D7F5F4',
+    borderWidth:4,
     
   },
   
