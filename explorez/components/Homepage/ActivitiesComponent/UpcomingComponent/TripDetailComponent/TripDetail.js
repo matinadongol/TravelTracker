@@ -4,6 +4,7 @@ import * as database from '../../../../database';
 import { useNavigation } from '@react-navigation/native';
 import styles from './Styles';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const TripDetail = ({ route }) => {
   const navigation = useNavigation();
@@ -16,6 +17,8 @@ const TripDetail = ({ route }) => {
   const [departureDate, setDepartureDate] = useState(new Date(item.startDate));
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isInputEnabled, setIsInputEnabled] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   const showDatePicker = (dateType) => {
     setDatePickerVisibility(true);
@@ -61,6 +64,11 @@ const TripDetail = ({ route }) => {
     }
   };
 
+  const EditEnabled = () => {
+    setIsInputEnabled(!isInputEnabled);
+    setIsButtonVisible(!isButtonVisible)
+  }
+
   if (!item) {
     return (
       <View style={styles.container}>
@@ -70,6 +78,19 @@ const TripDetail = ({ route }) => {
   }
 
   return (
+    <>
+    <View style={styles.editDeleteButtons}>
+    <Pressable
+        style={({ pressed }) => [
+          styles.updateButton,
+          pressed ? styles.updateButtonPressed : null,
+        ]}
+        onPress={EditEnabled}
+      >
+        <Icon name="edit" size={30} color="#000" />
+      </Pressable>
+        
+    </View>
     <View style={styles.container}>
       <Text style={styles.title}>Trip Details</Text>
       <View style={styles.inputContainer}>
@@ -78,17 +99,18 @@ const TripDetail = ({ route }) => {
           style={styles.input}
           onChangeText={setEditedDestination}
           value={editedDestination}
+          editable={isInputEnabled}
         />
 
         <Pressable onPress={() => showDatePicker('departure')}>
           <Text style={[styles.text, styles.heading]}>
-            Departure Date: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()}
+            Departure Date: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()} 
           </Text>
         </Pressable>
 
         <Pressable onPress={() => showDatePicker('arrival')}>
           <Text style={[styles.text, styles.heading]}>
-            Arrival Date: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()}
+            Arrival Date: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()} 
           </Text>
         </Pressable>
 
@@ -96,30 +118,35 @@ const TripDetail = ({ route }) => {
         <TextInput
           style={styles.input}
           onChangeText={setEditedTripName}
-          value={editedTripName}
+          value={editedTripName} 
+          editable={isInputEnabled}
         />
         <Text style={[styles.text, styles.heading]}>Reason of Trip: </Text>
         <TextInput
           style={styles.input}
           onChangeText={setEditedTripTag}
           value={editedTripTag}
+          editable={isInputEnabled}
         />
         <Text style={[styles.text, styles.heading]}>Additional Comments: </Text>
         <TextInput
           style={styles.input}
           onChangeText={setEditedNotes}
           value={editedNotes}
+          editable={isInputEnabled}
         />
       </View>
-      <Pressable
-        style={({ pressed }) => [
-          styles.updateButton,
-          pressed ? styles.updateButtonPressed : null,
-        ]}
-        onPress={handleUpdate}
-      >
-        <Text style={styles.buttonText}>UPDATE</Text>
-      </Pressable>
+      {isButtonVisible && (
+        <Pressable
+          style={({ pressed }) => [
+            styles.updateButton,
+            pressed ? styles.updateButtonPressed : null,
+          ]}
+          onPress={handleUpdate}
+        >
+          <Text style={styles.buttonText}>UPDATE</Text>
+        </Pressable>
+      )}
           
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -128,6 +155,7 @@ const TripDetail = ({ route }) => {
         onCancel={hideDatePicker}
       />
     </View>
+    </>
   );
 };
 
