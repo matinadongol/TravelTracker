@@ -31,6 +31,14 @@ const TripDetail = ({ route }) => {
   };
 
   const handleDateConfirm = (selectedDate) => {
+    const currentDate = new Date();
+    console.log(currentDate)
+    console.log(selectedDate)
+
+    if (selectedDate < currentDate) {
+      Alert.alert('Invalid Date', 'Please select a future date.');
+      return;
+    }
     if (datePickerMode === 'departure') {
       setDepartureDate(selectedDate);
     } else if (datePickerMode === 'arrival') {
@@ -42,6 +50,26 @@ const TripDetail = ({ route }) => {
   const [datePickerMode, setDatePickerMode] = useState(null);
 
   const handleUpdate = async () => {
+    if (editedDestination.trim() === '') {
+      Alert.alert('Please enter a valid destination.');
+      return;
+    }
+  
+    if (editedTripName.trim() === '') {
+      Alert.alert('Please enter a valid occasion.');
+      return;
+    }
+
+    if (editedTripTag.trim() === '') {
+      Alert.alert('Error', 'Please enter a valid reason of trip.');
+      return;
+    }
+
+    if (departureDate >= arrivalDate) {
+      Alert.alert('Invalid Dates', 'Departure date must be before the arrival date.');
+      return;
+    }
+
     if (!item.id) {
       console.error('Invalid item ID');
       return;
