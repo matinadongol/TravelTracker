@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import NewTrip from './components/Homepage/ActivitiesComponent/TripsComponent/NewTrip';
 import UpcomingComponent from './components/Homepage/ActivitiesComponent/UpcomingComponent/UpcomingComponent';
 import TripDetail from './components/Homepage/ActivitiesComponent/UpcomingComponent/TripDetailComponent/TripDetail';
+import CheckCurrencyComponent from './components/Homepage/FooterComponents/CurrencyRateComponent/CheckCurrencyComponent/CheckCurrency';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
             },title: 'Edit Trip', headerTintColor: '#fff',}}>
           {(props) => <TripDetail {...props} />}
         </Stack.Screen>
+        <Stack.Screen name="CheckCurrencyComponent" component={CheckCurrencyComponent}/>
 
       </Stack.Navigator>
     </NavigationContainer>
