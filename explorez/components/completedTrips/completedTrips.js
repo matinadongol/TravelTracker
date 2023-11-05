@@ -70,7 +70,7 @@ const CompletedTrips = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#E2F0EE'
+        backgroundColor: 'white'
     },
     upcomingTxt:{
         fontFamily:'bai',
