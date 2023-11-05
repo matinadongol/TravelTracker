@@ -6,6 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import NewTrip from './components/Homepage/ActivitiesComponent/TripsComponent/NewTrip';
 import UpcomingComponent from './components/Homepage/ActivitiesComponent/UpcomingComponent/UpcomingComponent';
 import TripDetail from './components/Homepage/ActivitiesComponent/UpcomingComponent/TripDetailComponent/TripDetail';
+import CompletedTrips from './components/completedTrips/CompletedTrips';
+import CheckCurrencyComponent from './components/Homepage/FooterComponents/CurrencyRateComponent/CheckCurrencyComponent/CheckCurrency';
 
 const Stack = createStackNavigator();
 
@@ -19,10 +21,15 @@ export default function App() {
         <Stack.Screen name="NewTrip" component={NewTrip} 
           options={{
             headerStyle: {
-              backgroundColor: '#273835',
+              backgroundColor: '#E2F0EE',
             },
-            headerTintColor: '#fff', 
-            title: 'New Trip'
+            headerTintColor: 'black', 
+            title: 'Create a trip',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'bai',
+              fontSize: 30
+            }
           }}
         />
         <Stack.Screen name="UpcomingComponent" component={UpcomingComponent} 
@@ -33,11 +40,36 @@ export default function App() {
             headerTintColor: '#fff', 
           }}
         />
-        <Stack.Screen name="TripDetail" options={{headerStyle: {
-              backgroundColor: '#273835',
-            },title: 'Edit Trip', headerTintColor: '#fff',}}>
-          {(props) => <TripDetail {...props} />}
+        <Stack.Screen name="TripDetail" 
+          options={{
+            headerStyle: {
+              backgroundColor: '#E2F0EE',
+            },
+            title: 'Trip Details', 
+            headerTintColor: 'black',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'bai',
+              fontSize: 30
+            },
+            }}>
+          {(props) => 
+            <TripDetail 
+              {...props} 
+              />}
         </Stack.Screen>
+        <Stack.Screen name="CompletedTrips" component={CompletedTrips} 
+          options={{
+            title: 'Completed Trips', 
+            headerTintColor: 'black',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'bai',
+              fontSize: 30
+            },
+          }}
+        />
+        <Stack.Screen name="CheckCurrencyComponent" component={CheckCurrencyComponent}/>
 
       </Stack.Navigator>
     </NavigationContainer>

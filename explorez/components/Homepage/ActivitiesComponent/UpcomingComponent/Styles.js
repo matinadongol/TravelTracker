@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
     container: {
         marginTop:20,
         paddingBottom:25,
+        marginBottom: 70
     },
     upcomingTxt:{
         fontFamily:'bai',
@@ -25,7 +26,11 @@ const styles = StyleSheet.create({
     upcomingListDestination:{
         fontSize: 25,
         fontWeight: '500',
-        marginBottom: 3
+        marginBottom: 3,
+        fontFamily: 'bai',
+    },
+    upcomingListStartDate:{
+        fontFamily: 'bai',
     }
 })
 export default styles;

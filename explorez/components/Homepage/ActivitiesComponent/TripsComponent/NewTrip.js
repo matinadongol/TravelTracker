@@ -1,22 +1,15 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Text, TextInput, Pressable, ActivityIndicator, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Alert} from "react-native"
+import {View, StyleSheet, Text, TextInput, Pressable, ActivityIndicator, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Alert, ScrollView} from "react-native"
 import {Picker} from '@react-native-picker/picker';
 import * as database from '../../../database';
 import { useState, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from "@react-native-community/datetimepicker";
-import {
-    actions,
-    RichEditor,
-    RichToolbar,
-  } from "react-native-pell-rich-editor";
+import { useFonts } from "expo-font";
 
 const NewTrip = () => {
-  const richText = useRef();
   const navigation = useNavigation();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [descHTML, setDescHTML] = useState("");
-  const [showDescError, setShowDescError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tripName, setTripName] = useState('');
   const [destination, setDestination] = useState('');
@@ -28,7 +21,6 @@ const NewTrip = () => {
   const [endDate, setEndDate] = useState('');
   const [showStartPicker, setShowStartPicker] = useState(false);
   const [showEndPicker, setShowEndPicker] = useState(false);
-    
     useEffect(() => {
       const keyboardDidShowListener = Keyboard.addListener(
         'keyboardDidShow',
@@ -94,21 +86,7 @@ const NewTrip = () => {
       setIsTextInputFocused(false);
     };
 
-    const richTextHandle = (descriptionText) => {
-      if (descriptionText) {
-        setShowDescError(false);
-        setDescHTML(descriptionText);
-      } else {
-        setShowDescError(true);
-        setDescHTML("");
-      }
-    };
-
     const handleSubmit = async () => {
-      const replaceHTML = descHTML.replace(/<(.|\n)*?>/g, "").trim();
-      const replaceWhiteSpace = replaceHTML.replace(/&nbsp;/g, "").trim();
-      setNotes(replaceWhiteSpace)
-
       try{
           setLoading(true);
 
@@ -124,6 +102,7 @@ const NewTrip = () => {
               destination,
               tripTag,
               notes,
+              completed: false,
           }
   
           const id = await database.save(data)
@@ -138,9 +117,10 @@ const NewTrip = () => {
     }
 
     return (
+      <ScrollView contentContainerStyle={Styles.scrollContainer}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior={Platform.OS === 'android' ? 'padding' : 'height'}
                 style={Styles.container}
             >
         <View style={containerStyle}>
@@ -153,7 +133,7 @@ const NewTrip = () => {
       )}
             <View style={Styles.inputContainer}>
                 <TextInput
-                    placeholder="Trip Name *"
+                    placeholder="Occasion *"
                     onChangeText={text => setTripName(text)}
                     value={tripName}
                     style={Styles.inputText}
@@ -207,25 +187,18 @@ const NewTrip = () => {
             </Picker>
             </View>
             <View style={Styles.inputContainer}>
-              <RichEditor
-                ref={richText}
-                onChange={richTextHandle}
-                placeholder="Enter your notes here."
-                androidHardwareAccelerationDisabled={true}
-                style={Styles.richTextEditorStyle}
-                initialHeight={250}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-              />
-              <RichToolbar
-                editor={richText}
-                selectedIconTint="#873c1e"
-                iconTint="#312921"
-                actions={[
-                  actions.checkboxList,
-                ]}
-                style={Styles.richTextToolbarStyle}
-              />
+            <View style={Styles.inputContainer}>
+                <TextInput
+                    placeholder="Enter your notes here"
+                    onChangeText={text => setNotes(text)}
+                    value={notes}
+                    multiline={true}
+                    numberOfLines={5}
+                    style={Styles.inputText}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                />
+            </View>
         </View>
             <Pressable style={Styles.addBtn} onPress={handleSubmit} >
                 <Text style={Styles.text}>ADD</Text>
@@ -235,16 +208,18 @@ const NewTrip = () => {
                     <ActivityIndicator size="large" color="#0000ff" />
                 </View>)
             }
+            
         </View>
         </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
+        </ScrollView>
     )
 }
 
 const Styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E2F0EE'
+        backgroundColor: '#E2F0EE',
     },
     addBtn: {
         width:'30%',
@@ -265,12 +240,12 @@ const Styles = StyleSheet.create({
         fontFamily:'Bai-Jamjuree',
         fontSize:16,
         color:'gray',
-        padding: 10,
+        padding: 5,
         margin: 5,
         textAlignVertical: 'top'
     },
     inputContainer: {
-        borderRadius: 10,
+        borderRadius: 30,
         borderWidth: 0.5,
         borderColor: '#DBDBDB',
         margin: 10,
@@ -298,6 +273,18 @@ const Styles = StyleSheet.create({
     borderColor: "#c6c3b3",
     borderBottomEndRadius: 10,
     borderBottomLeftRadius: 10
+  },
+  headerLabel: {
+    textAlign: 'center',
+    marginTop: 50,
+    fontSize: 30,
+    fontFamily: 'bai'
+  },
+  scrollContainer: {
+    justifyContent: 'space-between',
+    paddingBottom: 300, 
+    backgroundColor: '#E2F0EE',
+    flexGrow: 1,
   },
 })
 

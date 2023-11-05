@@ -16,6 +16,9 @@ const TripsComponent = () => {
     const handleAddPress = () => {
         navigation.navigate('NewTrip');
     }
+    const handleCompletedPress = () => {
+        navigation.navigate('CompletedTrips');
+    }
 
     return (
         <View style={Styles.container}>
@@ -24,7 +27,7 @@ const TripsComponent = () => {
                 <Pressable style={Styles.pressableAdd} onPress={handleAddPress}>
                     <Text style={Styles.text}>Add New</Text>
                 </Pressable>
-                <Pressable style={Styles.pressableComp}>
+                <Pressable style={Styles.pressableComp} onPress={handleCompletedPress}>
                     <Text style={Styles.text}>Completed</Text>
                 </Pressable>
             </View>

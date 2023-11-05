@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable } from 'react-native';
+import { View, Text, TextInput, Pressable, Switch } from 'react-native';
 import * as database from '../../../../database';
 import { useNavigation } from '@react-navigation/native';
 import styles from './Styles';
@@ -20,7 +20,9 @@ const TripDetail = ({ route }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isInputEnabled, setIsInputEnabled] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
+  const [isChecked, setIsChecked] = useState(item.completed);
 
+  
   const showDatePicker = (dateType) => {
     setDatePickerVisibility(true);
     setDatePickerMode(dateType);
@@ -32,8 +34,6 @@ const TripDetail = ({ route }) => {
 
   const handleDateConfirm = (selectedDate) => {
     const currentDate = new Date();
-    console.log(currentDate)
-    console.log(selectedDate)
 
     if (selectedDate < currentDate) {
       Alert.alert('Invalid Date', 'Please select a future date.');
@@ -83,6 +83,7 @@ const TripDetail = ({ route }) => {
       endDate: updatedArrivalDate,
       tripName: editedTripName,
       tripTag: editedTripTag,
+      completed: isChecked,
     };
     try {
       console.log('Updated Data:', updatedData);
@@ -127,81 +128,119 @@ const TripDetail = ({ route }) => {
     );
   }
 
+  const handleSwitchToggle = () => {
+    setIsChecked(previousState => !previousState);
+  };
+
   return (
-    <>
-    <View style={styles.editDeleteButtons}>
-      <Pressable onPress={EditEnabled} style={styles.editButton}>
-          <Text style={styles.editButtonText}>Edit</Text>
-      </Pressable>
-      <Pressable onPress={handleDelete} style={styles.deleteButton}>
-      <Text style={styles.editButtonText}>Delete</Text>
-      </Pressable> 
-    </View>
-    <View style={styles.container}>
-      <Text style={styles.title}>Trip Details</Text>
-      <View style={styles.inputContainer}>
-        <Text style={[styles.text, styles.heading]}>Place: </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEditedDestination}
-          value={editedDestination}
-          editable={isInputEnabled}
-        />
-
-        <Pressable onPress={() => showDatePicker ('departure')} disabled={!isButtonVisible}>
-          <Text style={[styles.text, styles.heading]}>
-            Departure Date: {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()} 
-          </Text>
-        </Pressable>
-
-        <Pressable onPress={() => showDatePicker('arrival')} disabled={!isButtonVisible}>
-          <Text style={[styles.text, styles.heading]}>
-            Arrival Date: {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()} 
-          </Text>
-        </Pressable>
-
-        <Text style={[styles.text, styles.heading]}>Occasion: </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEditedTripName}
-          value={editedTripName} 
-          editable={isInputEnabled}
-        />
-        <Text style={[styles.text, styles.heading]}>Reason of Trip: </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEditedTripTag}
-          value={editedTripTag}
-          editable={isInputEnabled}
-        />
-        <Text style={[styles.text, styles.heading]}>Additional Comments: </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEditedNotes}
-          value={editedNotes}
-          editable={isInputEnabled}
+    <View style={styles.holder}>
+      <View style={styles.container}>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>Destination </Text>
+        <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setEditedDestination}
+            value={editedDestination}
+            editable={isInputEnabled}
+          />
+         </View>
+        </View>
+        <View style={styles.textContainer}>
+        <Text style={styles.text}>From </Text>
+         <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
+          <Pressable onPress={() => showDatePicker ('departure')} disabled={!isButtonVisible}>
+            <Text style={[styles.input]}>
+              {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()} 
+            </Text>
+          </Pressable>
+          </View>
+          </View>
+          <View style={styles.textContainer}>
+          <Text style={styles.text}>To</Text>
+          <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
+          <Pressable onPress={() => showDatePicker('arrival')} disabled={!isButtonVisible}>
+            <Text style={[styles.input, styles.heading]}>
+              {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()} 
+            </Text>
+          </Pressable>
+          </View>
+          </View>
+          <View style={styles.textContainer}>
+          <Text style={[styles.text, styles.heading]}>Occasion </Text>
+          <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
+          
+          <TextInput
+            style={styles.input}
+            onChangeText={setEditedTripName}
+            value={editedTripName} 
+            editable={isInputEnabled}
+          />
+          </View>
+          </View>
+          <View style={styles.textContainer}>
+          <Text style={[styles.text, styles.heading]}>Category </Text>
+          <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
+          
+          <TextInput
+            style={styles.input}
+            onChangeText={setEditedTripTag}
+            value={editedTripTag}
+            editable={isInputEnabled}
+          />
+          </View>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={[styles.text, styles.heading]}>Notes </Text>
+            <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
+            
+              <TextInput
+                style={styles.input}
+                onChangeText={setEditedNotes}
+                value={editedNotes}
+                editable={isInputEnabled}
+              />
+            </View>
+          </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10,marginHorizontal: 30 }}>
+          <Switch
+            value={isChecked}
+            onValueChange={handleSwitchToggle}
+            disabled={!isInputEnabled}
+          />
+          <Text style={styles.text}>Completed trip</Text>
+        </View>
+        { !isInputEnabled && !isChecked && <View style={styles.editDeleteButtons}>
+          <Pressable onPress={EditEnabled} style={styles.editButton}>
+              <Text style={styles.editButtonText}>Edit</Text>
+          </Pressable>
+          <Pressable onPress={handleDelete} style={styles.deleteButton}>
+            <Text style={styles.editButtonText}>Delete</Text>
+          </Pressable> 
+      </View>}
+        {isButtonVisible && (
+          <View style={styles.updateStyle}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.updateButton,
+              pressed ? styles.updateButtonPressed : null,
+            ]}
+            onPress={handleUpdate}
+          >
+            <Text style={styles.buttonText}>UPDATE</Text>
+          </Pressable>
+          </View>
+        )}
+            
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleDateConfirm}
+          onCancel={hideDatePicker}
         />
       </View>
-      {isButtonVisible && (
-        <Pressable
-          style={({ pressed }) => [
-            styles.updateButton,
-            pressed ? styles.updateButtonPressed : null,
-          ]}
-          onPress={handleUpdate}
-        >
-          <Text style={styles.buttonText}>UPDATE</Text>
-        </Pressable>
-      )}
-          
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleDateConfirm}
-        onCancel={hideDatePicker}
-      />
     </View>
-    </>
+    
   );
 };
 

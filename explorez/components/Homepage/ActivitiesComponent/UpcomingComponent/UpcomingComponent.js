@@ -13,7 +13,8 @@ const UpcomingComponent = () => {
     const [trips, setTrips] = useState([]);
     const navigation = useNavigation();
     const isFocused = useIsFocused();
-
+ 
+    
     const handleTripPress = (selectedItem) => {
       const sanitizedItem = {
         id: selectedItem.id,
@@ -22,7 +23,8 @@ const UpcomingComponent = () => {
         startDate: selectedItem.startDate,
         endDate: selectedItem.endDate,
         tripName: selectedItem.tripName,
-        tripTag: selectedItem.tripTag
+        tripTag: selectedItem.tripTag,
+        completed: selectedItem.completed
       };
       navigation.navigate('TripDetail', { item: sanitizedItem })
     };
@@ -55,7 +57,7 @@ const UpcomingComponent = () => {
             <Text style={styles.upcomingTxt}>UPCOMING</Text>
                 <FlatList
                     data={trips}
-                    keyExtractor={(item) => item.id.toString()}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <TouchableOpacity style={styles.upcomingList} onPress={() => handleTripPress(item)}>
                             <View style={styles.upcomingListDetails}>
