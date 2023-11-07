@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     borderColor: '#DBDBDB',
     marginHorizontal: 30,
     backgroundColor: 'white',
+    marginTop: 2,
   },
   input: {
     // fontFamily:'Bai-Jamjuree',
@@ -68,7 +69,8 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#8D8D8D',
     marginHorizontal: 30,
-    backgroundColor: 'E2F0EE'
+    backgroundColor: '#F0F0F0',
+    marginTop: 2,
   },
   textContainer: {
     marginVertical: 5
