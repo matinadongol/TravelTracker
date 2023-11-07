@@ -70,12 +70,12 @@ const CompletedTrips = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#F0F0F0'
     },
     upcomingTxt:{
         fontFamily:'bai',
-        fontSize:25,
-        color:'black',
+        fontSize:20,
+        color:'#8B8B8B',
         marginBottom: 15
     },
     upcomingList:{
@@ -83,11 +83,13 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        marginBottom: 25,
-        borderColor: '#d8f5f4',  
+        marginBottom: 15,
+        borderColor: '#E2E2E2',  
         borderWidth: 5, 
         borderRadius: 10,
-        padding: 20
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: 'white'
     },
     completedListDestination:{
         fontSize: 25,
@@ -99,7 +101,8 @@ const styles = StyleSheet.create({
       fontFamily: 'Bai-Jamjuree'
     },
     list: {
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        marginVertical:25
     }
 
 })

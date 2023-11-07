@@ -75,7 +75,20 @@ export default function App() {
             }
           }}
         />
-        <Stack.Screen name="CheckCurrencyComponent" component={CheckCurrencyComponent}/>
+        <Stack.Screen name="CheckCurrencyComponent" component={CheckCurrencyComponent}
+        options={{
+          headerStyle: {
+            backgroundColor: '#273835',
+          },
+          title: 'Check Currency', 
+          headerTintColor: 'white',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'bai',
+            fontSize: 25,
+            color: '#E6E6E6',
+          }
+        }}/>
 
       </Stack.Navigator>
     </NavigationContainer>

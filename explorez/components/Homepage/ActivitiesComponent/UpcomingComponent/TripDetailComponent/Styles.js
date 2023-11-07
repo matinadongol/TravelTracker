@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   holder: {
     flex: 1,
-    backgroundColor: '#E2F0EE',
+    backgroundColor: '#F0F0F0',
   },
   editDeleteButtons: {
     justifyContent: 'space-between',
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     padding: 16,
-    backgroundColor: '#E2F0EE',
+    backgroundColor: '#F0F0F0',
   },
   inputContainer: {
-    borderRadius: 30,
+    borderRadius: 10,
     borderWidth: 0.5,
     borderColor: '#DBDBDB',
     marginHorizontal: 30,
@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   inputNotEditable: {
-    borderRadius: 30,
+    borderRadius: 10,
     borderWidth: 0.5,
-    borderColor: '#DBDBDB',
+    borderColor: '#8D8D8D',
     marginHorizontal: 30,
     backgroundColor: 'E2F0EE'
   },
