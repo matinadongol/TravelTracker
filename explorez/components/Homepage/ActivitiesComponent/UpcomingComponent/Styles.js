@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     listContainer:{
-        height:280,
-        paddingTop:10
+        height: 350,
+        paddingTop:10,
     },
     upcomingList:{
         display: 'flex',

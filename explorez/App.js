@@ -28,8 +28,9 @@ export default function App() {
             headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
-              fontSize: 25,
+              fontSize: 22,
               color: '#E6E6E6',
+              marginLeft: 20,
             }
           }}
         />
@@ -51,8 +52,9 @@ export default function App() {
             headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
-              fontSize: 25,
+              fontSize: 22,
               color: '#E6E6E6',
+              marginLeft: 20,
             }
             }}>
           {(props) => 
@@ -70,7 +72,7 @@ export default function App() {
             headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
-              fontSize: 25,
+              fontSize: 22,
               color: '#E6E6E6',
             }
           }}
@@ -85,7 +87,7 @@ export default function App() {
           headerTitleAlign: 'left',
           headerTitleStyle: {
             fontFamily: 'bai',
-            fontSize: 25,
+            fontSize: 22,
             color: '#E6E6E6',
           }
         }}/>
