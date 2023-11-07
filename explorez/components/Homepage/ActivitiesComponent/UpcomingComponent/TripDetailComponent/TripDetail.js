@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, Switch } from 'react-native';
+import { View, Text, TextInput, Pressable, Switch, ScrollView } from 'react-native';
 import * as database from '../../../../database';
 import { useNavigation } from '@react-navigation/native';
 import styles from './Styles';
@@ -133,6 +133,7 @@ const TripDetail = ({ route }) => {
   };
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.holder}>
       <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -240,7 +241,7 @@ const TripDetail = ({ route }) => {
         />
       </View>
     </View>
-    
+    </ScrollView>
   );
 };
 

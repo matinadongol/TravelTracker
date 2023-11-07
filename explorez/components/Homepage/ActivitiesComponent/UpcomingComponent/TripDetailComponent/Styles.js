@@ -108,6 +108,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginHorizontal: 30
   },
+  scrollContainer: {
+    justifyContent: 'space-between',
+    paddingBottom: 300, 
+    backgroundColor: '#F0F0F0',
+    flexGrow: 1,
+    paddingTop:30
+  },
 });
 
 export default styles;
