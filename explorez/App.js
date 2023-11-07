@@ -21,14 +21,15 @@ export default function App() {
         <Stack.Screen name="NewTrip" component={NewTrip} 
           options={{
             headerStyle: {
-              backgroundColor: '#E2F0EE',
+              backgroundColor: '#273835',
             },
-            headerTintColor: 'black', 
-            title: 'Create a trip',
-            headerTitleAlign: 'center',
+            headerTintColor: 'white', 
+            title: 'Add New Trip',
+            headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
-              fontSize: 30
+              fontSize: 25,
+              color: '#E6E6E6'
             }
           }}
         />
@@ -37,7 +38,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: '#273835',
             },
-            headerTintColor: '#fff', 
+            headerTintColor: 'white',  
           }}
         />
         <Stack.Screen name="TripDetail" 
@@ -46,11 +47,12 @@ export default function App() {
               backgroundColor: '#E2F0EE',
             },
             title: 'Trip Details', 
-            headerTintColor: 'black',
-            headerTitleAlign: 'center',
+            headerTintColor: 'white', 
+            headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
-              fontSize: 30
+              fontSize: 25,
+              color: '#E6E6E6'
             },
             }}>
           {(props) => 
@@ -61,11 +63,12 @@ export default function App() {
         <Stack.Screen name="CompletedTrips" component={CompletedTrips} 
           options={{
             title: 'Completed Trips', 
-            headerTintColor: 'black',
+            headerTintColor: 'white',
             headerTitleAlign: 'center',
             headerTitleStyle: {
               fontFamily: 'bai',
-              fontSize: 30
+              fontSize: 25,
+              color: '#E6E6E6'
             },
           }}
         />

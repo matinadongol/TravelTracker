@@ -219,7 +219,7 @@ const NewTrip = () => {
 const Styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E2F0EE',
+        backgroundColor: '#F0F0F0',
     },
     addBtn: {
         width:'30%',
@@ -277,13 +277,13 @@ const Styles = StyleSheet.create({
   headerLabel: {
     textAlign: 'center',
     marginTop: 50,
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: 'bai'
   },
   scrollContainer: {
     justifyContent: 'space-between',
     paddingBottom: 300, 
-    backgroundColor: '#E2F0EE',
+    backgroundColor: '#F0F0F0',
     flexGrow: 1,
   },
 })

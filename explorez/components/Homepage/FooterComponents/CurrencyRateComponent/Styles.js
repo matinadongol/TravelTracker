@@ -3,21 +3,32 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-        width: '100%',
-        backgroundColor: '#273835'
+        backgroundColor: 'white',
+        paddingBottom:20,
+        paddingHorizontal:50
     },
     checkCurrencyButton: {
-        backgroundColor: '#00AF22',
-        padding: 10,
-        paddingHorizontal: 20,
         fontSize: 16,
-        marginVertical: 10,
         borderRadius: 10,
         fontFamily: 'bai',
-        color: 'white'
+        color: 'black',
+        marginHorizontal:10
+    },
+    borderTop:{
+        paddingHorizontal:'38%',
+        borderTopWidth:1,
+        borderTopColor:'#E2E2E2'
+    },
+    chkCurrencyContainer:{
+        marginTop:15,
+        paddingVertical:10,
+        flexDirection:'row',
+        alignItems:'center',
+    }, 
+    pressableContainer:{
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        alignItems:'space-between'
     }
 })
 export default styles;

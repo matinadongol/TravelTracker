@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        marginTop: 50
+        marginTop: 50,
+        backgroundColor: 'white'
     },
     fromAndToSection: {
         display: 'flex',

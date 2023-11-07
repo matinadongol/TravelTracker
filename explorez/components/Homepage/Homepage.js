@@ -11,6 +11,7 @@ const Homepage = () => {
             <HeaderComponent/>
             <ActivitiesComponent />
             <CurrencyRateComponent/>
+
         </View>
     )
 }

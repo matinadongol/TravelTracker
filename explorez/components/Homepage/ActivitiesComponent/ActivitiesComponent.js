@@ -4,6 +4,7 @@ import UpcomingComponent from "./UpcomingComponent/UpcomingComponent"
 import TripDetail from "./UpcomingComponent/TripDetailComponent/TripDetail"
 import NewTrip from "./TripsComponent/NewTrip"
 import { createStackNavigator } from '@react-navigation/stack';
+import CurrencyRateComponent from "../FooterComponents/CurrencyRateComponent/CurrencyRateComponent"
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,8 @@ const ActivitiesComponent = () => {
 const Styles = StyleSheet.create({
     container: {
         flex:1,
-        padding:50,
+        paddingHorizontal:50,
+        paddingTop:25,
         backgroundColor:'#fff',
         borderTopLeftRadius:50,
         borderTopRightRadius:50

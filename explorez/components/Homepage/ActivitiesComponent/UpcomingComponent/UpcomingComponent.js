@@ -55,7 +55,7 @@ const UpcomingComponent = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.upcomingTxt}>UPCOMING</Text>
-                <FlatList
+                <FlatList style={styles.listContainer}
                     data={trips}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (

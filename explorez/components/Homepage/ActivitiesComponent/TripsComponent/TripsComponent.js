@@ -37,7 +37,7 @@ const TripsComponent = () => {
 
 const Styles = StyleSheet.create({
     container: {
-        paddingBottom:25,
+        paddingBottom:20,
         borderBottomWidth:1,
         borderBottomColor:'#E2E2E2'
     },
