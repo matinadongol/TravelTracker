@@ -23,13 +23,13 @@ export default function App() {
             headerStyle: {
               backgroundColor: '#273835',
             },
-            headerTintColor: 'white', 
             title: 'Add New Trip',
+            headerTintColor: 'white',
             headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
               fontSize: 25,
-              color: '#E6E6E6'
+              color: '#E6E6E6',
             }
           }}
         />
@@ -44,16 +44,16 @@ export default function App() {
         <Stack.Screen name="TripDetail" 
           options={{
             headerStyle: {
-              backgroundColor: '#E2F0EE',
+              backgroundColor: '#273835',
             },
             title: 'Trip Details', 
-            headerTintColor: 'white', 
+            headerTintColor: 'white',
             headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
               fontSize: 25,
-              color: '#E6E6E6'
-            },
+              color: '#E6E6E6',
+            }
             }}>
           {(props) => 
             <TripDetail 
@@ -62,14 +62,17 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="CompletedTrips" component={CompletedTrips} 
           options={{
+            headerStyle: {
+              backgroundColor: '#273835',
+            },
             title: 'Completed Trips', 
             headerTintColor: 'white',
-            headerTitleAlign: 'center',
+            headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
               fontSize: 25,
-              color: '#E6E6E6'
-            },
+              color: '#E6E6E6',
+            }
           }}
         />
         <Stack.Screen name="CheckCurrencyComponent" component={CheckCurrencyComponent}/>

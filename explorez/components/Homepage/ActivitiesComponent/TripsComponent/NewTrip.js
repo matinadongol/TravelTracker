@@ -186,7 +186,7 @@ const NewTrip = () => {
                 <Picker.Item label="Business" value="Business" />
             </Picker>
             </View>
-            <View style={Styles.inputContainer}>
+            
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="Enter your notes here"
@@ -198,8 +198,7 @@ const NewTrip = () => {
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                 />
-            </View>
-        </View>
+          </View>
             <Pressable style={Styles.addBtn} onPress={handleSubmit} >
                 <Text style={Styles.text}>ADD</Text>
             </Pressable>
@@ -228,7 +227,8 @@ const Styles = StyleSheet.create({
         borderRadius: 10,
         borderColor:'#D7F5F4',
         borderWidth:4,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop:15
     },
     text: {
         fontFamily:'bai',
@@ -240,12 +240,13 @@ const Styles = StyleSheet.create({
         fontFamily:'Bai-Jamjuree',
         fontSize:16,
         color:'gray',
-        padding: 5,
+        paddingHorizontal: 15,
+        paddingVertical:5,
         margin: 5,
         textAlignVertical: 'top'
     },
     inputContainer: {
-        borderRadius: 30,
+        borderRadius: 10,
         borderWidth: 0.5,
         borderColor: '#DBDBDB',
         margin: 10,
@@ -285,6 +286,7 @@ const Styles = StyleSheet.create({
     paddingBottom: 300, 
     backgroundColor: '#F0F0F0',
     flexGrow: 1,
+    paddingTop:30
   },
 })
 

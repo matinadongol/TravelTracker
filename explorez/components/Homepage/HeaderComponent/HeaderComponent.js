@@ -11,7 +11,7 @@ const HeaderComponent = () => {
     return (
         <View style={Styles.container}>
             <Image source={require("../../../assets/explorezlogo.png")} style={Styles.icon} resizeMode="stretch"></Image>
-            <Text style={Styles.slogan}>Some Slogan Over Here</Text>
+            <Text style={Styles.slogan}>Exploring world made EasY</Text>
         </View>
     )
 }
