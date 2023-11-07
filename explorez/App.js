@@ -25,12 +25,10 @@ export default function App() {
             },
             title: 'Add New Trip',
             headerTintColor: 'white',
-            headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
               fontSize: 22,
               color: '#E6E6E6',
-              marginLeft: 20,
             }
           }}
         />
@@ -49,12 +47,10 @@ export default function App() {
             },
             title: 'Trip Details', 
             headerTintColor: 'white',
-            headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
               fontSize: 22,
               color: '#E6E6E6',
-              marginLeft: 20,
             }
             }}>
           {(props) => 
@@ -69,7 +65,6 @@ export default function App() {
             },
             title: 'Completed Trips', 
             headerTintColor: 'white',
-            headerTitleAlign: 'left',
             headerTitleStyle: {
               fontFamily: 'bai',
               fontSize: 22,
@@ -84,7 +79,6 @@ export default function App() {
           },
           title: 'Check Currency', 
           headerTintColor: 'white',
-          headerTitleAlign: 'left',
           headerTitleStyle: {
             fontFamily: 'bai',
             fontSize: 22,
