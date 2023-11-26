@@ -21,15 +21,15 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     currencyInputSection: {
-        fontSize: 20,
-        marginTop: 10,
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
         borderWidth: 1,
-        borderRadius: 10,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
-        backgroundColor: '#fff',
-        textAlign: 'center',
-        width: '100%'
+        borderColor: 'gray',
+        borderRadius: 4,
+        color: 'black',
+        paddingRight: 30,
+        width: 150
     },
     exchangeButton: {
         backgroundColor: '#00AF22',
