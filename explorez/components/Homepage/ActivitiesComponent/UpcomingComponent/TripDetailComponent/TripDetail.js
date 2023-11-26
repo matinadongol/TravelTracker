@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, Switch, ScrollView } from 'react-native';
+import { View, Text, TextInput, Pressable, Switch, ScrollView, TouchableOpacity } from 'react-native';
 import * as database from '../../../../database';
 import { useNavigation } from '@react-navigation/native';
 import styles from './Styles';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Alert } from 'react-native';
+import Weather from '../../../WeatherComponent/Weather';
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const TripDetail = ({ route }) => {
   const navigation = useNavigation();
@@ -22,7 +24,16 @@ const TripDetail = ({ route }) => {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(item.completed);
 
-  
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={handleWeatherPress} style={{ marginRight: 10 }}>
+          <FontAwesome5 name="cloud-sun-rain" size={24} color="#21A6FC"/>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   const showDatePicker = (dateType) => {
     setDatePickerVisibility(true);
     setDatePickerMode(dateType);
@@ -93,6 +104,10 @@ const TripDetail = ({ route }) => {
       console.error('Error updating trip:', error);
     }
   };
+
+  const handleWeatherPress = () => {
+    navigation.navigate('Weather', item.destination);
+}
 
   const handleDelete = () => {
     Alert.alert(
@@ -219,6 +234,8 @@ const TripDetail = ({ route }) => {
             <Text style={styles.editButtonText}>Delete</Text>
           </Pressable> 
       </View>}
+      
+      
         {isButtonVisible && (
           <View style={styles.updateStyle}>
           <Pressable

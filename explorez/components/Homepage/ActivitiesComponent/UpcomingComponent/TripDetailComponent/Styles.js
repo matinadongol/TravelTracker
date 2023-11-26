@@ -84,7 +84,17 @@ const styles = StyleSheet.create({
     borderWidth:4,
     alignItems: 'center'
   },
-  
+  weatherBtn: {
+    width:'25%',
+    // backgroundColor: '#21A6FC',
+    padding: 5,
+    borderRadius: 10,
+    borderColor:'#D7F5F4',
+    borderWidth:4,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    // margin: 'auto'
+  },
   updateButtonPressed: {
     backgroundColor: '#A9C2D7',
     borderWidth: 2,
