@@ -66,7 +66,7 @@ const CheckCurrencyComponent = () => {
               const exchangeRate = data['Time Series FX (Daily)'][date]['4. close'];
               return { date, rate: exchangeRate };
             } else {
-              console.error(`No exchange rate data available for ${date}`);
+              //console.error(`No exchange rate data available for ${date}`);
               return { date, rate: 'N/A' };
             }
           } catch (error) {
