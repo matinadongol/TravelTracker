@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         paddingVertical: 10,
     },
     labelName: {
