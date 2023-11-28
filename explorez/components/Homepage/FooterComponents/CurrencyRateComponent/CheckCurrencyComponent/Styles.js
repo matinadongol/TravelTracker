@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         borderRadius: 10,
         alignItems: 'center',
-        marginVertical: 100
+        marginVertical: 100,
     },
     convertedResult: {
         display: 'flex',
