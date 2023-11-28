@@ -35,8 +35,8 @@ const CheckCurrencyComponent = () => {
 
     const getExchangeRate = async () => {
         try {
-          console.log('From Currency:', fromCurrency);
-          console.log('To Currency:', toCurrency);
+          // console.log('From Currency:', fromCurrency);
+          // console.log('To Currency:', toCurrency);
           const response = await axios.get(
             `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${fromCurrency}&to_currency=${toCurrency}&apikey=8U8CYTTA2JW54MQ1`
           );
@@ -89,7 +89,7 @@ const CheckCurrencyComponent = () => {
         } catch (error) {
             console.error('Error fetching exchange rate:', error);
         }
-          console.log(exchangeRate)
+          //console.log(exchangeRate)
         }
         setPreviousExchangeRates(rates);
       };
@@ -97,12 +97,9 @@ const CheckCurrencyComponent = () => {
     
     return (
         <View style={styles.container}>
-          {console.log("currency code:", currencyCodes)}
             <View style={styles.fromAndToSection}>
                 <View>
                     <Text style={styles.labelName}>Base Currency</Text>
-                    
-                    
                     <RNPickerSelect
                         placeholder={{ label: 'Select base currency', value: null }}
                         items={currencyCodes}

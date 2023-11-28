@@ -71,7 +71,7 @@ const NearbyPlacesComponent = ({ route }) => {
 
   return (
     <View>
-      <Text>Nearby Places:</Text>
+      <Text>Nearby Places: </Text>
       {nearbyPlaces.map((place, index) => (
         <View key={index}>
           <Text>Name: {place.name}</Text>
