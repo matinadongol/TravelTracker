@@ -118,7 +118,7 @@ const CheckCurrencyComponent = () => {
                 </View>
                 
             </View>
-            <Text>*Enter only currency code. Example: USD</Text>
+            {/* <Text>*Enter only currency code. Example: USD</Text> */}
             <Pressable onPress={getExchangeRate} style={styles.exchangeButton}>
                 <Text style={styles.exchangeButtonText}>Exchange</Text>
             </Pressable> 
