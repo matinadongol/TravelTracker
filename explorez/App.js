@@ -10,6 +10,7 @@ import TripDetail from './components/Homepage/ActivitiesComponent/UpcomingCompon
 import CompletedTrips from './components/completedTrips/CompletedTrips';
 import CheckCurrencyComponent from './components/Homepage/FooterComponents/CurrencyRateComponent/CheckCurrencyComponent/CheckCurrency';
 import Weather from './components/Homepage/WeatherComponent/Weather';
+import NearbyPlacesComponent from './components/Homepage/ActivitiesComponent/UpcomingComponent/NearbyPlacesComponents/NearbyPlacesComponent'
 import * as Notifications from 'expo-notifications';
 
 const Stack = createStackNavigator();
@@ -113,6 +114,19 @@ export default function App() {
             }
           }}
         />
+        <Stack.Screen name="NearbyPlacesComponent" component={NearbyPlacesComponent}
+        options={{
+          headerStyle: {
+            backgroundColor: '#273835',
+          },
+          title: 'Check Currency', 
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontFamily: 'bai',
+            fontSize: 22,
+            color: '#E6E6E6',
+          }
+        }}/>
 
       </Stack.Navigator>
     </NavigationContainer>

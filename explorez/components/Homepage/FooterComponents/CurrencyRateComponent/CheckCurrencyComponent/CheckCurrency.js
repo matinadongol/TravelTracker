@@ -30,6 +30,9 @@ const CheckCurrencyComponent = () => {
       fetchCurrencyCodes();
     }, []);
 
+    const apikey = "JBZXNKLCK9P9OWNF"
+    //const apikey = "8U8CYTTA2JW54MQ1"
+
     const getExchangeRate = async () => {
         try {
           console.log('From Currency:', fromCurrency);
@@ -125,7 +128,7 @@ const CheckCurrencyComponent = () => {
             <View style={styles.convertedResult}>
                 <Text style={styles.labelName}>Exchange Rate</Text>
                 {exchangeRate &&  
-                    <Text style={styles.exchangeRate}>{exchangeRate}</Text>
+                    <Text style={styles.exchangeRate}>1 {fromCurrency} = {exchangeRate} {toCurrency}</Text>
                 }
             </View>
             <View>

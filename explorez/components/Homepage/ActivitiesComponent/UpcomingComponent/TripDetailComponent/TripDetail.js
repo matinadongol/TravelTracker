@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './Styles';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { Alert } from 'react-native';
+import { Alert } from 'react-native'
+import RNPickerSelect from 'react-native-picker-select'
 import Weather from '../../../WeatherComponent/Weather';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
@@ -23,6 +24,9 @@ const TripDetail = ({ route }) => {
   const [isInputEnabled, setIsInputEnabled] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(item.completed);
+
+  const [selectedType, setSelectedType] = useState(null);
+
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -58,13 +62,22 @@ const TripDetail = ({ route }) => {
     hideDatePicker();
   };
 
-  const [datePickerMode, setDatePickerMode] = useState(null);
+  const [datePickerMode, setDatePickerMode] = useState(null)
+
+  
+
+  
 
   const handleUpdate = async () => {
-    if (editedDestination.trim() === '') {
-      Alert.alert('Please enter a valid destination.');
+    const isValidDestination = await validateDestination(editedDestination);
+    if (!isValidDestination) {
+      Alert.alert('Must be a city name', 'Please enter a valid destination')
       return;
     }
+    // if (editedDestination.trim() === '') {
+    //   Alert.alert('Please enter a valid destination.');
+    //   return;
+    // }
   
     if (editedTripName.trim() === '') {
       Alert.alert('Please enter a valid occasion.');
@@ -145,12 +158,67 @@ const TripDetail = ({ route }) => {
 
   const handleSwitchToggle = () => {
     setIsChecked(previousState => !previousState);
-  };
+  }
+
+  const types = [
+    { label: 'Cafes', value: 'cafe' },
+    { label: 'Bars', value: 'bar' },
+    { label: 'Restaurant', value: 'restaurant' },
+    { label: 'Hotels', value: 'lodging' },
+    { label: 'Parks', value: 'park' },
+    { label: 'Gyms', value: 'gym' },
+    { label: 'Shopping Malls', value: 'shopping_mall' },
+    { label: 'Movie Theaters', value: 'movie_theater' },
+    { label: 'Museums', value: 'museum' },
+    { label: 'Pharmacies', value: 'pharmacy' },
+    { label: 'Gas Stations', value: 'gas_station' },
+  ]
+
+  const handleFindNearbyPlaces = () => {
+    if (selectedType) {
+      navigation.navigate('NearbyPlacesComponent', { cityName: editedDestination, type: selectedType });
+    }
+  }
+
+  const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'
+    //const API_KEY = 'AIzaSyAben9PgAFjIVOIEKA4NUv0rN_dLgcp1cE'
+
+  const validateDestination = async (cityName) => {
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(cityName)}&key=${API_KEY}`
+      );
+      const data = await response.json();
+      if (data.results.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error('Error validating destination:', error);
+      return false;
+    }
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.holder}>
       <View style={styles.container}>
+      <View style={styles.nearbyPlacesContainer}>
+        <Text style={styles.nearbyPlacesLabel}>Find Nearby Places: </Text>
+        <RNPickerSelect
+          placeholder={{ label: 'Find Nearby Places', value: null }}
+          onValueChange={(itemValue) => {
+            setSelectedType(itemValue)
+          }}
+          items={types}
+          value={selectedType}
+          style={styles.nearbyPlacesDropdown}
+        />
+        <Pressable onPress={() => handleFindNearbyPlaces(selectedType)} style={styles.nearbyPlacesButtonText}>
+          <Text style={styles.nearbyPlacesButtonText}>Search</Text>
+        </Pressable>
+      </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Destination </Text>
         <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>

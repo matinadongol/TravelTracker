@@ -21,6 +21,7 @@
     "axios": "^1.6.0",
     "expo": "~49.0.13",
     "expo-app-loading": "^2.1.1",
+    "expo-location": "~16.1.0",
     "expo-notifications": "~0.20.1",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.5.0",

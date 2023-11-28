@@ -25,11 +25,6 @@ const CurrencyRateComponent = () => {
                     <Text style={styles.checkCurrencyButton}>Currency Rate</Text>
                     <Icon name="angle-right" size={25} color="black" />
                 </Pressable>
-                <Pressable style={styles.chkCurrencyContainer}>
-                    <FontAwesome5 name="money-bill-alt" size={24} color="green" />
-                    <Text style={styles.checkCurrencyButton}>Nearby Places</Text>
-                    <Icon name="angle-right" size={25} color="black" />
-                </Pressable>
             </View>
         </View>
     )

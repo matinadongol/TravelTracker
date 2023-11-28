@@ -95,6 +95,13 @@ const NewTrip = () => {
               return;
           }
 
+          const isValidDestination = await validateDestination(destination);
+          if (!isValidDestination) {
+            Alert.alert('Must be a city name', 'Please enter a valid destination');
+            setLoading(false);
+            return;
+          }
+
           const data = {
               tripName,
               startDate,
@@ -113,6 +120,27 @@ const NewTrip = () => {
       } finally {
           setLoading(false);
           
+      }
+    }
+
+
+    const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'
+    //const API_KEY = 'AIzaSyAben9PgAFjIVOIEKA4NUv0rN_dLgcp1cE'
+
+    const validateDestination = async (cityName) => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(cityName)}&key=${API_KEY}`
+        );
+        const data = await response.json();
+        if (data.results.length > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.error('Error validating destination:', error);
+        return false;
       }
     }
 

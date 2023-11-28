@@ -125,6 +125,21 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingTop:30
   },
+  nearbyPlacesContainer:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  nearbyPlacesLabel:{
+    fontWeight: '700'
+  },
+  nearbyPlacesDropdown:{
+    borderColor: 'black',
+    borderWidth: 10,
+    borderRadius: 8,
+    padding: 10,
+    fontSize: 20
+  }
 });
 
 export default styles;
