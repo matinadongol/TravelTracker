@@ -202,23 +202,16 @@ const TripDetail = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+      { !isInputEnabled && !isChecked && <View style={styles.editDeleteButtons}>
+          <Pressable onPress={EditEnabled} style={styles.editButton}>
+              <Text style={styles.editButtonText}>Edit</Text>
+          </Pressable>
+          <Pressable onPress={handleDelete} style={styles.deleteButton}>
+            <Text style={styles.editButtonText}>Delete</Text>
+          </Pressable> 
+      </View>}
     <View style={styles.holder}>
       <View style={styles.container}>
-      <View style={styles.nearbyPlacesContainer}>
-        <Text style={styles.nearbyPlacesLabel}>Find Nearby Places: </Text>
-        <RNPickerSelect
-          placeholder={{ label: 'Find Nearby Places', value: null }}
-          onValueChange={(itemValue) => {
-            setSelectedType(itemValue)
-          }}
-          items={types}
-          value={selectedType}
-          style={styles.nearbyPlacesDropdown}
-        />
-        <Pressable onPress={() => handleFindNearbyPlaces(selectedType)} style={styles.nearbyPlacesButtonText}>
-          <Text style={styles.nearbyPlacesButtonText}>Search</Text>
-        </Pressable>
-      </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Destination </Text>
         <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
@@ -294,14 +287,7 @@ const TripDetail = ({ route }) => {
           />
           <Text style={styles.text}>Completed trip</Text>
         </View>
-        { !isInputEnabled && !isChecked && <View style={styles.editDeleteButtons}>
-          <Pressable onPress={EditEnabled} style={styles.editButton}>
-              <Text style={styles.editButtonText}>Edit</Text>
-          </Pressable>
-          <Pressable onPress={handleDelete} style={styles.deleteButton}>
-            <Text style={styles.editButtonText}>Delete</Text>
-          </Pressable> 
-      </View>}
+        
       
       
         {isButtonVisible && (
@@ -326,6 +312,24 @@ const TripDetail = ({ route }) => {
         />
       </View>
     </View>
+    <View style={styles.nearbyPlacesContainer}>
+        <Text style={styles.nearbyPlacesLabel}>Find Nearby Places </Text>
+        <View style={styles.nearbyPlacesSearchContainer}>
+          <View style={styles.nearbyPlacesDropdown}>
+              <RNPickerSelect 
+              placeholder={{ label: 'Select an option', value: null }}
+              onValueChange={(itemValue) => {
+                setSelectedType(itemValue)
+              }}
+              items={types}
+              value={selectedType}
+            />
+          </View>
+          <Pressable onPress={() => handleFindNearbyPlaces(selectedType)} style={styles.nearbyPlacesButton}>
+            <Text style={styles.nearbyPlacesSearchText}>Search</Text>
+          </Pressable>
+        </View>
+      </View>
     </ScrollView>
   );
 };

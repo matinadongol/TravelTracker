@@ -10,29 +10,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     padding: 20,
-    marginHorizontal: 50,
+    marginHorizontal: 20,
     fontFamily: 'bai'
   },
   editButton: {
+    width:'40%',
     backgroundColor: '#00AF22',
-    width: 100,
-    padding: 5,
-    alignItems: 'center',
+    padding: 10,
     borderRadius: 10,
-
+    borderColor:'#D7F5F4',
+    borderWidth:4,
+    alignSelf: 'center',
   },
   editButtonText: {
     color: "white",
     fontSize: 16,
-    fontFamily: 'bai'
+    fontFamily: 'bai',
+    alignSelf: 'center',
   },
   deleteButton: {
-    backgroundColor: '#FC2121',
-    width: 100,
-    padding: 5,
-    alignItems: 'center',
+    width:'40%',
+    backgroundColor: 'red',
+    padding: 10,
     borderRadius: 10,
-   
+    borderColor:'#D7F5F4',
+    borderWidth:4,
+    alignSelf: 'center',
   },
   container: {
     flex: 1,
@@ -120,26 +123,49 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     justifyContent: 'space-between',
-    paddingBottom: 300, 
-    backgroundColor: '#F0F0F0',
+    paddingBottom: 100, 
+    backgroundColor: 'white',
     flexGrow: 1,
-    paddingTop:30
   },
   nearbyPlacesContainer:{
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'column',
+    paddingTop:20,
   },
   nearbyPlacesLabel:{
-    fontWeight: '700'
+    fontWeight: '700',
+    fontSize:'20',
+    alignSelf:'flex-start',
+    paddingLeft:20,
+    marginBottom:10
   },
   nearbyPlacesDropdown:{
-    borderColor: 'black',
-    borderWidth: 10,
-    borderRadius: 8,
+    width:'48%',
+    borderRadius: 2,
+    borderColor:'#D7F5F4',
+    borderWidth:2,
+    padding:10
+  },
+  nearbyPlacesSearchContainer:{
+    flexDirection:'row',
+    justifyContent:'flex-start',
+    alignItems:'center',
+  },
+  nearbyPlacesButton:{
+    width:'40%',
+    backgroundColor: '#273835',
     padding: 10,
-    fontSize: 20
-  }
+    borderRadius: 10,
+    borderColor:'#D7F5F4',
+    borderWidth:4,
+    alignSelf: 'center',
+    marginLeft:10,
+    alignItems:'center',
+  },
+  nearbyPlacesSearchText:{
+    color:'white'
+  },
 });
 
 export default styles;

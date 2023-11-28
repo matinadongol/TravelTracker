@@ -119,7 +119,7 @@ export default function App() {
           headerStyle: {
             backgroundColor: '#273835',
           },
-          title: 'Check Currency', 
+          title: 'Nearby Places', 
           headerTintColor: 'white',
           headerTitleStyle: {
             fontFamily: 'bai',
