@@ -101,7 +101,7 @@ const CheckCurrencyComponent = () => {
                 <View>
                     <Text style={styles.labelName}>Base Currency</Text>
                     <RNPickerSelect
-                        placeholder={{ label: 'Select base currency', value: null }}
+                        placeholder={{ label: 'Tap to select', value: null }}
                         items={currencyCodes}
                         value={fromCurrency}
                         onValueChange={(value) => setFromCurrency(value)}
@@ -110,7 +110,7 @@ const CheckCurrencyComponent = () => {
                 <View>
                     <Text style={styles.labelName}>Target Currency</Text>
                     <RNPickerSelect
-                        placeholder={{ label: 'Select target currency', value: null }}
+                        placeholder={{ label: 'Tap to select', value: null }}
                         items={currencyCodes}
                         value={toCurrency}
                         onValueChange={(value) => setToCurrency(value)}
