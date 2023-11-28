@@ -4,14 +4,16 @@ const styles = StyleSheet.create({
   holder: {
     flex: 1,
     backgroundColor: '#F0F0F0',
+    padding:20
   },
   editDeleteButtons: {
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 20,
-    marginHorizontal: 20,
-    fontFamily: 'bai'
+    gap: 20,
+    fontFamily: 'bai',
+    marginLeft:50,
+    marginTop:10,
   },
   editButton: {
     width:'40%',
@@ -24,7 +26,8 @@ const styles = StyleSheet.create({
   },
   editButtonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 13,
+    fontWeight:'500',
     fontFamily: 'bai',
     alignSelf: 'center',
   },
@@ -41,7 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
-    padding: 16,
     backgroundColor: '#F0F0F0',
   },
   inputContainer: {
@@ -123,7 +125,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     justifyContent: 'space-between',
-    paddingBottom: 100, 
     backgroundColor: 'white',
     flexGrow: 1,
   },
@@ -131,14 +132,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    paddingTop:20,
   },
   nearbyPlacesLabel:{
     fontWeight: '700',
-    fontSize:'20',
     alignSelf:'flex-start',
     paddingLeft:20,
-    marginBottom:10
+    marginBottom:20,
+    fontSize:18,
+    marginTop:30
   },
   nearbyPlacesDropdown:{
     width:'48%',
@@ -147,10 +148,18 @@ const styles = StyleSheet.create({
     borderWidth:2,
     padding:10
   },
+  nearbyPlacesHeader:{
+    flexDirection:'row',
+    paddingBottom:10,
+    paddingTop:10
+  },
   nearbyPlacesSearchContainer:{
     flexDirection:'row',
     justifyContent:'flex-start',
     alignItems:'center',
+    borderColor:'#E8E8E8',
+    borderBottomWidth:1,
+    paddingBottom:30,
   },
   nearbyPlacesButton:{
     width:'40%',

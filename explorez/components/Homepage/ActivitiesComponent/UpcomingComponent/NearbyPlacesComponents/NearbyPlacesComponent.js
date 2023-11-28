@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 import * as Location from 'expo-location';
+import styles from './Styles';
 
 const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'
 //const API_KEY = 'AIzaSyAben9PgAFjIVOIEKA4NUv0rN_dLgcp1cE'
@@ -70,15 +71,16 @@ const NearbyPlacesComponent = ({ route }) => {
   }, [cityName, type]);
 
   return (
-    <View>
-      <Text>Nearby Places: </Text>
+    <ScrollView style={styles.container}> 
+     <View style={styles.containerBack}>
       {nearbyPlaces.map((place, index) => (
-        <View key={index}>
-          <Text>Name: {place.name}</Text>
-          <Text>Address: {place.address}</Text>
-        </View>
+          <View key={index} style={styles.placesContainer}>
+            <Text style={styles.placeNameLabel}>{place.name}</Text>
+            <Text>{place.address}</Text>
+          </View>
       ))}
-    </View>
+       </View>
+    </ScrollView>
   );
 };
 
