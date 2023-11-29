@@ -1,11 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from 'react'
 import {View, StyleSheet, Text, TextInput, Pressable, ActivityIndicator, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Alert, ScrollView} from "react-native"
-import {Picker} from '@react-native-picker/picker';
-import * as database from '../../../database';
-import { useState, useRef } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { useFonts } from "expo-font";
+import {Picker} from '@react-native-picker/picker'
+import * as database from '../../../database'
+import { useState, useRef } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import DateTimePicker from "@react-native-community/datetimepicker"
+import { useFonts } from "expo-font"
+import Config from 'react-native-config'
 
 const NewTrip = () => {
   const navigation = useNavigation();
@@ -123,14 +124,12 @@ const NewTrip = () => {
       }
     }
 
-
-    const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'
-    //const API_KEY = 'AIzaSyAben9PgAFjIVOIEKA4NUv0rN_dLgcp1cE'
+    const apiKey = Config.API_KEY_To_Get_ExchangeRate;
 
     const validateDestination = async (cityName) => {
       try {
         const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(cityName)}&key=${API_KEY}`
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(cityName)}&key=${apiKey}`
         );
         const data = await response.json();
         if (data.results.length > 0) {

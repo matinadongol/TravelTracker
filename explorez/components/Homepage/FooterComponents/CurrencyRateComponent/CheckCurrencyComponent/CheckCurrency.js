@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import RNPickerSelect from 'react-native-picker-select'
 import styles from './Styles'
 import axios from 'axios'
+import Config from 'react-native-config'
 
 const CheckCurrencyComponent = () => {
     const [fromCurrency, setFromCurrency] = useState('');
@@ -30,15 +31,14 @@ const CheckCurrencyComponent = () => {
       fetchCurrencyCodes();
     }, []);
 
-    const apikey = "JBZXNKLCK9P9OWNF"
-    //const apikey = "8U8CYTTA2JW54MQ1"
+    const apiKey = Config.API_KEY_To_Get_NearbyPlace;
 
     const getExchangeRate = async () => {
         try {
           // console.log('From Currency:', fromCurrency);
           // console.log('To Currency:', toCurrency);
           const response = await axios.get(
-            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${fromCurrency}&to_currency=${toCurrency}&apikey=8U8CYTTA2JW54MQ1`
+            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${fromCurrency}&to_currency=${toCurrency}&apikey=${apiKey}`
           );
           setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
           fetchPreviousDaysExchangeRates()
