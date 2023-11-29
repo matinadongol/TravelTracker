@@ -9,7 +9,7 @@ import { useIsFocused } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications';
 
 const UpcomingComponent = () => {
-    const [trips, setTrips] = useState([]);
+    const [trips, setTrips] = useState({});
     const navigation = useNavigation();
     const isFocused = useIsFocused();
  
@@ -80,7 +80,9 @@ const UpcomingComponent = () => {
     const fetchData = async () => {
       try {
         const data = await database.load();
+    
         setTrips(data);
+        
         data.forEach(trip => {
           scheduleNotification(trip);
         });
