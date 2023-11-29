@@ -86,6 +86,7 @@ const UpcomingComponent = () => {
         data.forEach(trip => {
           scheduleNotification(trip);
         });
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
