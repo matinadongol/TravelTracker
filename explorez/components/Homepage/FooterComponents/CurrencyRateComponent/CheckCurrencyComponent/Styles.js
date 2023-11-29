@@ -53,9 +53,17 @@ const styles = StyleSheet.create({
         fontSize: 25,
         backgroundColor: '#fff',
         padding: 20,
-        marginTop: 10,
+        marginTop: 20,
         borderWidth: 1,
-        borderRadius: 10
+        borderRadius: 10,
+        marginBottom: 20,
+    },
+    previousexchangelabel: {
+        marginBottom: 20,
+    },
+    previousexchangecontainer:{
+        display: 'flex',
+        alignItems: 'center'
     }
 })
 export default styles;
