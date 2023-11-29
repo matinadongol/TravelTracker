@@ -131,7 +131,7 @@ const CheckCurrencyComponent = () => {
             <View style={styles.previousexchangecontainer}>
             <Text style={styles.previousexchangelabel}>Previous exchange rates:</Text>
                 {previousExchangeRates.map(rate => (
-                <Text key={rate.date}>{`${rate.date}: ${rate.rate}`}</Text>
+                <Text key={rate.date}>{`Date: ${rate.date}, Amount: ${rate.rate}`}</Text>
                 ))}
             </View>
         </View>
