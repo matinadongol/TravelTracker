@@ -16,6 +16,9 @@ const CurrencyRateComponent = () => {
     const handleCheckCurrencyButton = () => {
         navigation.navigate('CheckCurrencyComponent')
     }
+    const handleFavoriteButton = () => {
+        navigation.navigate('FavoritePlaces')
+    }
     return (
         <View style={styles.container}>
             <View style={styles.borderTop}></View>
@@ -23,6 +26,11 @@ const CurrencyRateComponent = () => {
                 <Pressable onPress={handleCheckCurrencyButton} style={styles.chkCurrencyContainer}>
                     <FontAwesome5 name="money-bill-alt" size={24} color="green" />
                     <Text style={styles.checkCurrencyButton}>Currency Rate</Text>
+                    <Icon name="angle-right" size={25} color="black" />
+                </Pressable>
+                <Pressable onPress={handleFavoriteButton} style={styles.chkCurrencyContainer}>
+                    <FontAwesome5 name="heart" size={24} color="green" />
+                    <Text style={styles.checkCurrencyButton}>Favorite</Text>
                     <Icon name="angle-right" size={25} color="black" />
                 </Pressable>
             </View>

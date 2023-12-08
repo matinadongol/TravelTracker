@@ -1,2 +1,2 @@
-export { load, getCompletedTrips } from './read'
-export { save, update, remove } from './write'
+export { load, getCompletedTrips, loadFavoritePlaces, subscribeToChanges } from './read'
+export { save, update, remove, getFavoritePlaces, saveFavoritePlace, removeFavoritePlaces } from './write'

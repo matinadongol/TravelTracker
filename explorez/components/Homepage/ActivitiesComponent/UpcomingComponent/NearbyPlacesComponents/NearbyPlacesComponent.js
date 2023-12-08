@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Pressable, Alert } from 'react-native';
 import axios from 'axios';
 import * as Location from 'expo-location';
+import * as database from '../../../../database';
 import styles from './Styles';
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
-const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'
-//const API_KEY = 'AIzaSyAben9PgAFjIVOIEKA4NUv0rN_dLgcp1cE'
+const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'; 
 
 const NearbyPlacesComponent = ({ route }) => {
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
@@ -15,7 +16,7 @@ const NearbyPlacesComponent = ({ route }) => {
     const fetchCoordinates = async () => {
       try {
         let location;
-        //console.log(cityName)
+
         if (!cityName) {
           const { status } = await Location.requestForegroundPermissionsAsync();
           if (status !== 'granted') {
@@ -27,7 +28,7 @@ const NearbyPlacesComponent = ({ route }) => {
           const geocodeResponse = await axios.get(
             `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(cityName)}&key=${API_KEY}`
           );
-          //console.log(geocodeResponse)
+
           if (
             geocodeResponse.data &&
             geocodeResponse.data.results &&
@@ -46,17 +47,29 @@ const NearbyPlacesComponent = ({ route }) => {
           }
         }
 
-        const { lat, lng } = location
+        const { lat, lng } = location;
         const placesResponse = await axios.get(
           `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=${type}&key=${API_KEY}`
         );
 
         if (placesResponse.data && placesResponse.data.results) {
           const placesData = placesResponse.data.results.map(place => ({
+            id: place.place_id,
             name: place.name,
             address: place.vicinity,
+            isFavorite: false, 
+            cityName: cityName
           }));
-          setNearbyPlaces(placesData);
+
+          setNearbyPlaces(prevPlaces => {
+            const updatedPlaces = placesData.map(place => {
+              const foundPlace = prevPlaces.find(p => p.id === place.id);
+              return foundPlace ? { ...foundPlace, isFavorite: place.isFavorite } : place;
+            });
+            return updatedPlaces;
+          });
+
+          await fetchFavoritesFromFirestore(placesData);
         } else {
           console.error('No nearby places found.');
           setNearbyPlaces([]);
@@ -67,19 +80,84 @@ const NearbyPlacesComponent = ({ route }) => {
       }
     };
 
+    const fetchFavoritesFromFirestore = async (placesData) => {
+      try {
+        const favorites = await database.getFavoritePlaces();
+
+        const favoritesArray = Object.keys(favorites).map(key => ({
+          id: key,
+          ...favorites[key],
+        }));
+
+        const updatedNearbyPlaces = placesData.map(place => ({
+          ...place,
+          isFavorite: favoritesArray.some(fav => fav.id === place.id),
+        }));
+
+        setNearbyPlaces(updatedNearbyPlaces);
+      } catch (error) {
+        console.error('Error fetching favorite places:', error);
+      }
+    };
+
     fetchCoordinates();
   }, [cityName, type]);
 
+  const toggleFavoritePlace = async (placeIndex) => {
+    try {
+      const updatedPlaces = [...nearbyPlaces];
+      const currentPlace = updatedPlaces[placeIndex]
+  
+      const isAlreadyFavorite = currentPlace.isFavorite
+      const isInFavorites = nearbyPlaces.some(
+        place => place.name === currentPlace.name && place.isFavorite === true
+      );
+
+      if (isInFavorites) {
+        Alert.alert(`${currentPlace.name} is in your favorite list`);
+        return;
+      }
+
+      currentPlace.isFavorite = !isAlreadyFavorite;
+  
+      setNearbyPlaces([...updatedPlaces])
+  
+      if (!isAlreadyFavorite) {
+        const docId = await database.saveFavoritePlace(currentPlace)
+        currentPlace.id = docId;
+        setNearbyPlaces([...updatedPlaces])
+      } else {
+        const idToRemove = currentPlace.id
+        await database.removeFavoritePlaces(idToRemove)
+        const updatedPlaceWithoutId = { ...currentPlace }
+        delete updatedPlaceWithoutId.id
+        updatedPlaces[placeIndex] = updatedPlaceWithoutId
+        setNearbyPlaces([...updatedPlaces])
+      }
+    } catch (error) {
+      console.error('Error toggling favorites:', error)
+    }
+  };
+  
   return (
     <ScrollView style={styles.container}> 
-     <View style={styles.containerBack}>
-      {nearbyPlaces.map((place, index) => (
+      <View style={styles.containerBack}>
+        {nearbyPlaces.map((place, index) => (
           <View key={index} style={styles.placesContainer}>
-            <Text style={styles.placeNameLabel}>{place.name}</Text>
-            <Text>{place.address}</Text>
+            <View style={styles.placesDescription}>
+              <Text style={styles.placeNameLabel}>{place.name}</Text>
+              <Text>{place.address}</Text>
+            </View>
+            <Pressable onPress={() => toggleFavoritePlace(index)}>
+              <Icon
+                name="heart"
+                size={30}
+                color={place.isFavorite ? 'red' : '#000'}
+              />
+            </Pressable>
           </View>
-      ))}
-       </View>
+        ))}
+      </View>
     </ScrollView>
   );
 };

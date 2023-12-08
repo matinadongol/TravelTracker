@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        marginTop: 50,
-        backgroundColor: 'white'
+        backgroundColor: '#fff'
     },
     fromAndToSection: {
         display: 'flex',
@@ -18,10 +17,11 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     labelName: {
-        fontSize: 18
+        fontSize: 18,
+        marginBottom: 10
     },
     currencyInputSection: {
-        fontSize: 16,
+        fontSize: 20,
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderWidth: 1,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         borderRadius: 10,
         alignItems: 'center',
-        marginVertical: 100,
+        marginVertical: 50,
     },
     convertedResult: {
         display: 'flex',
@@ -58,12 +58,30 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 20,
     },
-    previousexchangelabel: {
-        marginBottom: 20,
-    },
-    previousexchangecontainer:{
+    previousExchangeContainer:{
         display: 'flex',
         alignItems: 'center'
+    },
+    previousExchangeHeading: {
+        marginBottom: 20,
+    },
+    previousExchangeView:{
+        backgroundColor:'white',
+        padding:15,
+        borderColor:'#E8E8E8',
+        borderBottomWidth:1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    previousExchangeRate:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    previousExchangeDate:{
+        fontSize: 14,
+        fontWeight: 'light'
     }
+    
 })
 export default styles;
