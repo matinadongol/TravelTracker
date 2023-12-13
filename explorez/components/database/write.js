@@ -26,14 +26,10 @@ export async function update(id, data) {
 
 export async function savePackingList(tripId, packingListItems) {
     try {
-      // Reference to the packingList collection under the specified trip
       const packingListRef = collection(db, 'Trips', tripId, 'packingList');
   
-      // Clear existing packing list items
       const existingItems = await getDocs(packingListRef);
       existingItems.forEach(async (item) => await deleteDoc(doc(packingListRef, item.id)));
-        console.log("packing list item anem: ", packingListItems)
-      // Add new packing list items
       for (const packingListItem of packingListItems) {
         await addDoc(packingListRef, { itemName: packingListItem.itemName });
       }
@@ -48,16 +44,11 @@ export async function savePackingList(tripId, packingListItems) {
 
   export async function updatePackingList(tripId, data) {
     try {
-        console.log('Received data:', tripId);
-
         const packingListRef = collection(db, 'Trips', `${tripId}`, 'packingList');
         for (const item of data) {
             const newItemRef = await addDoc(packingListRef, { item: item });
-    console.log('Added item with ID:', newItemRef.id);
-            
         }
 
-        console.log('Packing list saved successfully.');
         return true;
     } catch (error) {
         console.error('Error saving packing list:', error);

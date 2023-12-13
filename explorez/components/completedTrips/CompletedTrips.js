@@ -17,8 +17,6 @@ const CompletedTrips = () => {
     const isFocused = useIsFocused();
     const navigation = useNavigation();
 
-
-
     useEffect(() => {
         if (isFocused) {
           fetchData();
@@ -208,7 +206,6 @@ const styles = StyleSheet.create({
       marginLeft: 10,
     },
   
-    // Add styles for the modal and menu buttons
     modalContainer: {
       backgroundColor: 'white',
       padding: 20,

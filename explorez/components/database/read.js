@@ -25,10 +25,8 @@ export  async function load () {
     try {
       const packingListRef = collection(db, 'Trips', tripId, 'packingList');
   
-      // Fetch all documents from the packingList collection
       const querySnapshot = await getDocs(packingListRef);
       const packList = []
-      // Convert documents to an array of packing list items
       const packingList = querySnapshot.forEach((doc) => {
           const packListData = {
             ...doc.data(),
@@ -36,7 +34,6 @@ export  async function load () {
         }
         packList.push(packListData)
     });
-      // setPackingList(packingList)
       
       return packList;
     } catch (error) {
