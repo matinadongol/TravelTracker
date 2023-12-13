@@ -175,6 +175,31 @@ const styles = StyleSheet.create({
   nearbyPlacesSearchText:{
     color:'white'
   },
+  tabButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#fff', // Background color for the tab buttons container
+    elevation: 2, // Android-specific: shadow to lift the buttons
+    shadowColor: '#000', // iOS-specific: shadow color
+    shadowOffset: { width: 0, height: 2 }, // iOS-specific: shadow offset
+    shadowOpacity: 0.2, // iOS-specific: shadow opacity
+    shadowRadius: 2, // iOS-specific: shadow radius
+  },
+
+  tabButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+
+  activeTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#21A6FC', // Color for the active tab indicator
+    color: '#21A6FC', // Color for the text of the active tab
+  },
+
 });
 
 export default styles;

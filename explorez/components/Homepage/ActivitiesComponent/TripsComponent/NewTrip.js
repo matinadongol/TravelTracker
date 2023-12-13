@@ -211,6 +211,8 @@ const NewTrip = () => {
                 >
                 <Picker.Item label="Leisure" value="Leisure" />
                 <Picker.Item label="Business" value="Business" />
+                <Picker.Item label="Cultural" value="Cultural" />
+                <Picker.Item label="Educational" value="Educational" />
             </Picker>
             </View>
             

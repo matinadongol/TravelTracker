@@ -13,6 +13,7 @@ import Weather from './components/Homepage/WeatherComponent/Weather';
 import NearbyPlacesComponent from './components/Homepage/ActivitiesComponent/UpcomingComponent/NearbyPlacesComponents/NearbyPlacesComponent'
 import FavoritePlaces from './components/Homepage/ActivitiesComponent/FavoritePlaces/FavoritePlaces';
 import * as Notifications from 'expo-notifications';
+import PackingList from './components/Homepage/ActivitiesComponent/UpcomingComponent/TripDetailComponent/PackingList';
 
 const Stack = createStackNavigator();
 
@@ -128,6 +129,20 @@ export default function App() {
             color: '#E6E6E6',
           }
         }}/>
+        <Stack.Screen name="PackingList" component={PackingList} 
+          options={{
+            headerStyle: {
+              backgroundColor: '#273835',
+            },
+            title: 'PackingList', 
+            headerTintColor: 'white',
+            headerTitleStyle: {
+              fontFamily: 'bai',
+              fontSize: 22,
+              color: '#E6E6E6',
+            }
+          }}
+        />
         <Stack.Screen name="FavoritePlaces" component={FavoritePlaces}
         options={{
           headerStyle: {

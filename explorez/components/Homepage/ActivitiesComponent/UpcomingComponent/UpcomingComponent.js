@@ -7,11 +7,19 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import { useNavigation } from '@react-navigation/native';
 import { useIsFocused } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications';
+import { FontAwesome } from '@expo/vector-icons';
+import Modal from 'react-native-modal';
+import { filter } from 'lodash';
 
 const UpcomingComponent = () => {
     const [trips, setTrips] = useState({});
     const navigation = useNavigation();
     const isFocused = useIsFocused();
+    const [filteredTrips, setFilteredTrips] = useState([]);
+    const [showFilteredTrips, setShowFilteredTrips] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+  
+
  
     
     const handleTripPress = (selectedItem) => {
@@ -106,24 +114,134 @@ const UpcomingComponent = () => {
       return null;
     }
 
+    const handleFilterPress = () => {
+      setIsModalVisible(true);
+    };
+  
+    const handleFilter = (filterType) => {
+      let filteredData = [];
+
+      switch (filterType) {
+        case 'Business':
+          filteredData = trips.filter(async (trip) => {
+            try {
+              const data = await database.getFilteredTrips('Business', false);
+              setFilteredTrips(data);
+              console.log(data)
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          });
+          break;
+        case 'Leisure':
+          filteredData = trips.filter(async (trip) => {
+            try {
+              const data = await database.getFilteredTrips('Leisure', false);
+              setFilteredTrips(data);
+              console.log(data)
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          });
+          break;
+        case 'Educational':
+          filteredData = trips.filter(async (trip) => {
+            try {
+              const data = await database.getFilteredTrips('Educational', false);
+              setFilteredTrips(data);
+              console.log(data)
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          });
+          break;
+        case 'Cultural':
+          filteredData = trips.filter(async (trip) => {
+            try {
+              const data = await database.getFilteredTrips('Cultural', false);
+              setFilteredTrips(data);
+              console.log(data)
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          });
+          break;
+        default:
+          filteredData = trips;
+      }
+      setFilteredTrips(filteredData);
+    setShowFilteredTrips(true);
+    setIsModalVisible(false);
+    }
+  
+    const closeModal = () => {
+      setIsModalVisible(false);
+    };
     return (
         <View style={styles.container}>
-            <Text style={styles.upcomingTxt}>UPCOMING</Text>
-                <FlatList style={styles.listContainer}
-                    data={trips}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity style={styles.upcomingList} onPress={() => handleTripPress(item)}>
-                            <View style={styles.upcomingListDetails}>
-                                <Text style={styles.upcomingListDestination}>{item.destination}</Text>
-                                <Text style={styles.upcomingListStartDate}>{item.startDate}</Text>
-                            </View>
-                            <View style={styles.upcomingListButton}>
-                                <Icon name="angle-right" size={30} color="#000" />
-                            </View>
-                        </TouchableOpacity>
-                    )}
-                    />
+        <View style={styles.upcomingHeader}>
+        <Text style={styles.upcomingTxt}>UPCOMING</Text>
+        
+        {/* Filter button */}
+        <TouchableOpacity onPress={() => handleFilterPress()} style={styles.filterButton}>
+          <FontAwesome name="filter" size={20} color="#21A6FC" />
+        </TouchableOpacity>
+      </View>
+
+      <Modal isVisible={isModalVisible} onBackdropPress={closeModal}>
+        <View style={styles.modalContainer}>
+          <TouchableOpacity onPress={() => handleFilter('Business')} style={styles.menuButton}>
+            <Text>Business</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('Leisure')} style={styles.menuButton}>
+            <Text>Leisure</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('Cultural')} style={styles.menuButton}>
+            <Text>Educational</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('Educational')} style={styles.menuButton}>
+            <Text>Cultural</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('None')} style={styles.menuButton}>
+            <Text>All</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      {showFilteredTrips ? (
+        <FlatList
+          style={styles.listContainer}
+          data={filteredTrips}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={styles.upcomingList} onPress={() => handleTripPress(item)}>
+              <View style={styles.upcomingListDetails}>
+                <Text style={styles.upcomingListDestination}>{item.destination}</Text>
+                <Text style={styles.upcomingListStartDate}>{item.startDate}</Text>
+              </View>
+              <View style={styles.upcomingListButton}>
+                <Icon name="angle-right" size={30} color="#000" />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      ) : (
+        <FlatList
+          style={styles.listContainer}
+          data={trips}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={styles.upcomingList} onPress={() => handleTripPress(item)}>
+              <View style={styles.upcomingListDetails}>
+                <Text style={styles.upcomingListDestination}>{item.destination}</Text>
+                <Text style={styles.upcomingListStartDate}>{item.startDate}</Text>
+              </View>
+              <View style={styles.upcomingListButton}>
+                <Icon name="angle-right" size={30} color="#000" />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      )}
         </View>
     )
 }

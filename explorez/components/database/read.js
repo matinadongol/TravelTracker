@@ -21,10 +21,54 @@ export  async function load () {
     return completedTrips;
   }
 
+  export  async function loadPackingList (tripId) {
+    try {
+      const packingListRef = collection(db, 'Trips', tripId, 'packingList');
+  
+      // Fetch all documents from the packingList collection
+      const querySnapshot = await getDocs(packingListRef);
+      const packList = []
+      // Convert documents to an array of packing list items
+      const packingList = querySnapshot.forEach((doc) => {
+          const packListData = {
+            ...doc.data(),
+            id: doc.id,
+        }
+        packList.push(packListData)
+    });
+      // setPackingList(packingList)
+      
+      return packList;
+    } catch (error) {
+      console.error('Error loading packing list:', error);
+      return [];
+    }
+  }
+
 export  async function getCompletedTrips () {
     const tripsRef = collection(db, 'Trips');
   
     const q = query(tripsRef, where('completed', '==', true));
+    const querySnapshot = await getDocs(q);
+  
+    const completedTrips = [];
+  
+    querySnapshot.forEach((doc) => {
+      const tripData = {
+        ...doc.data(),
+        id: doc.id,
+    }
+      completedTrips.push(tripData);
+    });
+  
+    return completedTrips;
+  }
+  
+  export  async function getFilteredTrips (filter, completed) {
+    const tripsRef = collection(db, 'Trips');
+  
+    const q = query(tripsRef, where('tripTag', '==', filter),
+    where('completed', '==', completed));
     const querySnapshot = await getDocs(q);
   
     const completedTrips = [];

@@ -38,6 +38,31 @@ const styles = StyleSheet.create({
         fontFamily: 'bai',
         fontWeight: '100',
         marginBottom:5
-    }
+    },
+    upcomingHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10,
+      },
+    
+      filterButton: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: '#EFEFEF',
+        marginLeft: 10,
+      },
+    
+      // Add styles for the modal and menu buttons
+      modalContainer: {
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+      },
+      menuButton: {
+        padding: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#EFEFEF',
+      },
 })
 export default styles;

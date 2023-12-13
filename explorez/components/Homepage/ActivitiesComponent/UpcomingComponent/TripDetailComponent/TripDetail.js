@@ -9,8 +9,11 @@ import { Alert } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import Weather from '../../../WeatherComponent/Weather';
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import PackingList from './PackingList';
+import {Picker} from '@react-native-picker/picker'
 
 const TripDetail = ({ route }) => {
+  const [activeTab, setActiveTab] = useState('tripDetails');
   const navigation = useNavigation();
   const { item } = route.params;
   const [editedDestination, setEditedDestination] = useState(item.destination);
@@ -26,8 +29,6 @@ const TripDetail = ({ route }) => {
   const [isChecked, setIsChecked] = useState(item.completed);
 
   const [selectedType, setSelectedType] = useState(null);
-
-
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -201,140 +202,159 @@ const TripDetail = ({ route }) => {
   }
 
   return (
+    <View>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.nearbyPlacesContainer}>
-        <Text style={styles.nearbyPlacesLabel}>Explore nearby places </Text>
-        <View style={styles.nearbyPlacesSearchContainer}>
-          <View style={styles.nearbyPlacesDropdown}>
-              <RNPickerSelect 
-              placeholder={{ label: 'Select an option', value: null }}
-              onValueChange={(itemValue) => {
-                setSelectedType(itemValue)
-              }}
-              items={types}
-              value={selectedType}
-            />
-          </View>
-          <Pressable onPress={() => handleFindNearbyPlaces(selectedType)} style={styles.nearbyPlacesButton}>
-            <Text style={styles.nearbyPlacesSearchText}>Search</Text>
-          </Pressable>
-        </View>
+      <View style={styles.tabButtonsContainer}>
+        <TouchableOpacity onPress={() => setActiveTab('tripDetails')}>
+          <Text style={[styles.tabButton, activeTab === 'tripDetails' && styles.activeTab]}>Trip Details</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setActiveTab('packingList')}>
+          <Text style={[styles.tabButton, activeTab === 'packingList' && styles.activeTab]}>Packing List</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.nearbyPlacesHeader}>
-        <Text style={styles.nearbyPlacesLabel}>Trip </Text>
-        { !isInputEnabled && !isChecked && <View style={styles.editDeleteButtons}>
+      {activeTab === 'tripDetails' && (
+        <><View style={styles.nearbyPlacesContainer}>
+          <Text style={styles.nearbyPlacesLabel}>Explore nearby places </Text>
+          <View style={styles.nearbyPlacesSearchContainer}>
+            <View style={styles.nearbyPlacesDropdown}>
+              <RNPickerSelect
+                placeholder={{ label: 'Select an option', value: null }}
+                onValueChange={(itemValue) => {
+                  setSelectedType(itemValue);
+                } }
+                items={types}
+                value={selectedType} />
+            </View>
+            <Pressable onPress={() => handleFindNearbyPlaces(selectedType)} style={styles.nearbyPlacesButton}>
+              <Text style={styles.nearbyPlacesSearchText}>Search</Text>
+            </Pressable>
+          </View>
+        </View><View style={styles.nearbyPlacesHeader}>
+            <Text style={styles.nearbyPlacesLabel}>Trip </Text>
+            {!isInputEnabled && !isChecked && <View style={styles.editDeleteButtons}>
               <Pressable onPress={EditEnabled} style={styles.editButton}>
-                  <Text style={styles.editButtonText}>Edit</Text>
+                <Text style={styles.editButtonText}>Edit</Text>
               </Pressable>
               <Pressable onPress={handleDelete} style={styles.deleteButton}>
                 <Text style={styles.editButtonText}>Delete</Text>
-              </Pressable> 
-          </View>}
-      </View>
-      <View style={styles.holder}>
-      <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>Destination </Text>
-        <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
-          <TextInput
-            style={styles.input}
-            onChangeText={setEditedDestination}
-            value={editedDestination}
-            editable={isInputEnabled}
-          />
-         </View>
-        </View>
-        <View style={styles.textContainer}>
-        <Text style={styles.text}>From </Text>
-         <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
-          <Pressable onPress={() => showDatePicker ('departure')} disabled={!isButtonVisible}>
-            <Text style={[styles.input]}>
-              {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth()+1) + "-" + departureDate.getUTCDate()} 
-            </Text>
-          </Pressable>
-          </View>
-          </View>
-          <View style={styles.textContainer}>
-          <Text style={styles.text}>To</Text>
-          <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
-          <Pressable onPress={() => showDatePicker('arrival')} disabled={!isButtonVisible}>
-            <Text style={[styles.input, styles.heading]}>
-              {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth()+1) + "-" + arrivalDate.getUTCDate()} 
-            </Text>
-          </Pressable>
-          </View>
-          </View>
-          <View style={styles.textContainer}>
-          <Text style={[styles.text, styles.heading]}>Occasion </Text>
-          <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
-          
-          <TextInput
-            style={styles.input}
-            onChangeText={setEditedTripName}
-            value={editedTripName} 
-            editable={isInputEnabled}
-          />
-          </View>
-          </View>
-          <View style={styles.textContainer}>
-          <Text style={[styles.text, styles.heading]}>Category </Text>
-          <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
-          
-          <TextInput
-            style={styles.input}
-            onChangeText={setEditedTripTag}
-            value={editedTripTag}
-            editable={isInputEnabled}
-          />
-          </View>
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={[styles.text, styles.heading]}>Notes </Text>
-            <View style={isInputEnabled? styles.inputContainer : styles.inputNotEditable}>
-            
-              <TextInput
-                style={styles.input}
-                onChangeText={setEditedNotes}
-                value={editedNotes}
-                editable={isInputEnabled}
-              />
+              </Pressable>
+            </View>}
+          </View><View style={styles.holder}>
+            <View style={styles.container}>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>Destination </Text>
+                <View style={isInputEnabled ? styles.inputContainer : styles.inputNotEditable}>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={setEditedDestination}
+                    value={editedDestination}
+                    editable={isInputEnabled} />
+                </View>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>From </Text>
+                <View style={isInputEnabled ? styles.inputContainer : styles.inputNotEditable}>
+                  <Pressable onPress={() => showDatePicker('departure')} disabled={!isButtonVisible}>
+                    <Text style={[styles.input]}>
+                      {departureDate.getUTCFullYear() + "-" + (departureDate.getUTCMonth() + 1) + "-" + departureDate.getUTCDate()}
+                    </Text>
+                  </Pressable>
+                </View>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>To</Text>
+                <View style={isInputEnabled ? styles.inputContainer : styles.inputNotEditable}>
+                  <Pressable onPress={() => showDatePicker('arrival')} disabled={!isButtonVisible}>
+                    <Text style={[styles.input, styles.heading]}>
+                      {arrivalDate.getUTCFullYear() + "-" + (arrivalDate.getUTCMonth() + 1) + "-" + arrivalDate.getUTCDate()}
+                    </Text>
+                  </Pressable>
+                </View>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={[styles.text, styles.heading]}>Occasion </Text>
+                <View style={isInputEnabled ? styles.inputContainer : styles.inputNotEditable}>
+
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={setEditedTripName}
+                    value={editedTripName}
+                    editable={isInputEnabled} />
+                </View>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={[styles.text, styles.heading]}>Category </Text>
+                <View style={isInputEnabled ? styles.inputContainer : styles.inputNotEditable}>
+                    <Picker
+                        selectedValue={editedTripTag}
+                        onValueChange={(itemValue, itemIndex) => setEditedTripTag(itemValue)}
+                    >
+                    <Picker.Item label="Leisure" value="Leisure" />
+                    <Picker.Item label="Business" value="Business" />
+                    <Picker.Item label="Cultural" value="Cultural" />
+                    <Picker.Item label="Educational" value="Educational" />
+                </Picker>
+                  {/* <TextInput
+                    style={styles.input}
+                    onChangeText={setEditedTripTag}
+                    value={editedTripTag}
+                    editable={isInputEnabled} /> */}
+                </View>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={[styles.text, styles.heading]}>Notes </Text>
+                <View style={isInputEnabled ? styles.inputContainer : styles.inputNotEditable}>
+
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={setEditedNotes}
+                    value={editedNotes}
+                    editable={isInputEnabled} />
+                </View>
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10, marginHorizontal: 30 }}>
+                <Switch
+                  value={isChecked}
+                  onValueChange={handleSwitchToggle}
+                  disabled={!isInputEnabled} />
+                <Text style={styles.text}>Completed trip</Text>
+              </View>
+
+
+
+              {isButtonVisible && (
+                <View style={styles.updateStyle}>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.updateButton,
+                      pressed ? styles.updateButtonPressed : null,
+                    ]}
+                    onPress={handleUpdate}
+                  >
+                    <Text style={styles.buttonText}>UPDATE</Text>
+                  </Pressable>
+                </View>
+              )}
+
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleDateConfirm}
+                onCancel={hideDatePicker} />
             </View>
-          </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10,marginHorizontal: 30 }}>
-          <Switch
-            value={isChecked}
-            onValueChange={handleSwitchToggle}
-            disabled={!isInputEnabled}
-          />
-          <Text style={styles.text}>Completed trip</Text>
-        </View>
-        
-      
-      
-        {isButtonVisible && (
-          <View style={styles.updateStyle}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.updateButton,
-              pressed ? styles.updateButtonPressed : null,
-            ]}
-            onPress={handleUpdate}
-          >
-            <Text style={styles.buttonText}>UPDATE</Text>
-          </Pressable>
-          </View>
-        )}
-            
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleDateConfirm}
-          onCancel={hideDatePicker}
-        />
-      </View>
-    </View>
+          </View></>
     
+      )}
+
+      
+      
     </ScrollView>
+    {activeTab === 'packingList' && (
+      <PackingList
+        id={item.id}
+      />
+    )}
+    </View>
   );
 };
 

@@ -6,9 +6,14 @@ import * as database from '../database';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import { FontAwesome } from '@expo/vector-icons'; 
+import Modal from 'react-native-modal';
 
 const CompletedTrips = () => {
     const [completedTrips, setCompletedTrips] = useState([]);
+    const [filteredTrips, setFilteredTrips] = useState([]);
+    const [showFilteredTrips, setShowFilteredTrips] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const isFocused = useIsFocused();
     const navigation = useNavigation();
 
@@ -19,6 +24,16 @@ const CompletedTrips = () => {
           fetchData();
         }
       }, [isFocused]);
+
+      React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerRight: () => (
+            <TouchableOpacity onPress={handleFilterPress} style={{ marginRight: 10 }}>
+              <FontAwesome name="filter" size={20} color="#21A6FC" />
+            </TouchableOpacity>
+          ),
+        });
+      }, [navigation]);
 
     const fetchData = async () => {
         try {
@@ -43,12 +58,94 @@ const CompletedTrips = () => {
         navigation.navigate('TripDetail', { item: sanitizedItem })
       };
 
+      const handleFilterPress = () => {
+        setIsModalVisible(true);
+      };
+    
+      const handleFilter = (filterType) => {
+        let filteredData = [];
+  
+        switch (filterType) {
+          case 'Business':
+            filteredData = completedTrips.filter(async (trip) => {
+              try {
+                const data = await database.getFilteredTrips('Business', true);
+                setFilteredTrips(data);
+                console.log(data)
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            });
+            break;
+          case 'Leisure':
+            filteredData = completedTrips.filter(async (trip) => {
+              try {
+                const data = await database.getFilteredTrips('Leisure', true);
+                setFilteredTrips(data);
+                console.log(data)
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            });
+            break;
+          case 'Educational':
+            filteredData = completedTrips.filter(async (trip) => {
+              try {
+                const data = await database.getFilteredTrips('Educational', true);
+                setFilteredTrips(data);
+                console.log(data)
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            });
+            break;
+          case 'Cultural':
+            filteredData = completedTrips.filter(async (trip) => {
+              try {
+                const data = await database.getFilteredTrips('Cultural', true);
+                setFilteredTrips(data);
+                console.log(data)
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            });
+            break;
+          default:
+            filteredData = trips;
+        }
+        setFilteredTrips(filteredData);
+      setShowFilteredTrips(true);
+      setIsModalVisible(false);
+      }
+      const closeModal = () => {
+        setIsModalVisible(false);
+      };
+
       return (
         <View style={styles.container}>
+           <Modal isVisible={isModalVisible} onBackdropPress={closeModal}>
+        <View style={styles.modalContainer}>
+          <TouchableOpacity onPress={() => handleFilter('Business')} style={styles.menuButton}>
+            <Text>Business</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('Leisure')} style={styles.menuButton}>
+            <Text>Leisure</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('Cultural')} style={styles.menuButton}>
+            <Text>Educational</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('Educational')} style={styles.menuButton}>
+            <Text>Cultural</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleFilter('None')} style={styles.menuButton}>
+            <Text>All</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
             <View style={styles.list}>
             
             <FlatList
-                data={completedTrips}
+                data={showFilteredTrips ? filteredTrips : completedTrips}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.upcomingList} onPress={() => handleTripPress(item)}>
@@ -103,7 +200,25 @@ const styles = StyleSheet.create({
     list: {
         marginHorizontal: 30,
         marginVertical:25
-    }
+    },
+    filterButton: {
+      padding: 10,
+      borderRadius: 5,
+      backgroundColor: '#EFEFEF',
+      marginLeft: 10,
+    },
+  
+    // Add styles for the modal and menu buttons
+    modalContainer: {
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 10,
+    },
+    menuButton: {
+      padding: 15,
+      borderBottomWidth: 1,
+      borderBottomColor: '#EFEFEF',
+    },
 
 })
 
