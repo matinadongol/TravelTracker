@@ -60,13 +60,13 @@ const FavoritePlaces = () => {
             data={favoritePlaces}
             keyExtractor={(item, index) => index.toString()} 
             renderItem={({ item }) => (
-                <View style={styles.favoritePlaceContainer}>
+                <View style={styles.favoritePlaceContainer} >
                     <View>
                       <Text style={styles.cityName}>{item.cityName}</Text>
                         <Text style={styles.favoritePlaceName}>{item.name}</Text>
                         <Text style={styles.favoritePlaceAddress}>{item.address}</Text>
                     </View>
-                        <TouchableOpacity onPress={() => handleDelete(item.id, item.name)}>
+                        <TouchableOpacity onPress={() => handleDelete(item.id, item.name)} >
                         <Icon
                             name="trash"
                             size={30}
