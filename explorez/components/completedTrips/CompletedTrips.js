@@ -129,10 +129,10 @@ const CompletedTrips = () => {
           <TouchableOpacity onPress={() => handleFilter('Leisure')} style={styles.menuButton}>
             <Text>Leisure</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleFilter('Cultural')} style={styles.menuButton}>
+          <TouchableOpacity onPress={() => handleFilter('Educational')} style={styles.menuButton}>
             <Text>Educational</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleFilter('Educational')} style={styles.menuButton}>
+          <TouchableOpacity onPress={() => handleFilter('Cultural')} style={styles.menuButton}>
             <Text>Cultural</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleFilter('None')} style={styles.menuButton}>
