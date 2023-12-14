@@ -169,7 +169,7 @@ const NewTrip = () => {
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="Start Date *"
-                    value={startDate.toString()}
+                    value={typeof startDate === 'string' ? startDate.toString() : ''}
                     style={Styles.inputText}
                     onFocus={showStartDatePicker}
                 />
@@ -184,7 +184,7 @@ const NewTrip = () => {
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="End Date"
-                    value={endDate.toString()}
+                    value={typeof endDate === 'string' ? endDate.toString() : ''}
                     style={Styles.inputText}
                     onFocus={showEndDatePicker}
                 />
