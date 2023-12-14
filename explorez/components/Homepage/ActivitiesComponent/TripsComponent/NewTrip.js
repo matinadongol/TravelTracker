@@ -124,7 +124,7 @@ const NewTrip = () => {
       }
     }
 
-    const apiKey = Config.API_KEY_To_Get_ExchangeRate;
+    const apiKey = "AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU";
 
     const validateDestination = async (cityName) => {
       try {
