@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2, 
         borderBottomColor: '#000',
         backgroundColor: '#ffffff'
+        
     },
     cityName: {
         fontSize: 25,

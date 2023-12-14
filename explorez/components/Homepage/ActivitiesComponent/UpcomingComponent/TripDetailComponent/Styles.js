@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F0F0F0',
     padding:20
+    
   },
   editDeleteButtons: {
     justifyContent: 'flex-start',
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
     fontFamily: 'bai',
     marginLeft:50,
     marginTop:10,
+
   },
   editButton: {
     width:'40%',

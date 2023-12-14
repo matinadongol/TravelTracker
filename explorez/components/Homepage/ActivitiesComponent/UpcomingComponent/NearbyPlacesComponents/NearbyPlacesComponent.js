@@ -6,7 +6,7 @@ import * as database from '../../../../database';
 import styles from './Styles';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'; 
+const API_KEY = 'AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU'
 
 const NearbyPlacesComponent = ({ route }) => {
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
@@ -21,7 +21,7 @@ const NearbyPlacesComponent = ({ route }) => {
           const { status } = await Location.requestForegroundPermissionsAsync();
           if (status !== 'granted') {
             console.error('Permission to access location was denied.');
-            return;
+            return
           }
           location = await Location.getCurrentPositionAsync({});
         } else {
@@ -94,7 +94,7 @@ const NearbyPlacesComponent = ({ route }) => {
           isFavorite: favoritesArray.some(fav => fav.id === place.id),
         }));
 
-        setNearbyPlaces(updatedNearbyPlaces);
+        setNearbyPlaces(updatedNearbyPlaces)
       } catch (error) {
         console.error('Error fetching favorite places:', error);
       }
@@ -159,6 +159,7 @@ const NearbyPlacesComponent = ({ route }) => {
         ))}
       </View>
     </ScrollView>
+
   );
 };
 

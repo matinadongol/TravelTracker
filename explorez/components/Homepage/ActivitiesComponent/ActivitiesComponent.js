@@ -18,6 +18,7 @@ const ActivitiesComponent = () => {
 }
 
 const Styles = StyleSheet.create({
+    
     container: {
         flex:1,
         paddingHorizontal:50,

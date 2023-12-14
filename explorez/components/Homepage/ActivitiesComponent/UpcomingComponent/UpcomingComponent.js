@@ -18,9 +18,6 @@ const UpcomingComponent = () => {
     const [filteredTrips, setFilteredTrips] = useState([]);
     const [showFilteredTrips, setShowFilteredTrips] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-  
-
- 
     
     const handleTripPress = (selectedItem) => {
       const sanitizedItem = {
@@ -175,8 +172,8 @@ const UpcomingComponent = () => {
     }
   
     const closeModal = () => {
-      setIsModalVisible(false);
-    };
+      setIsModalVisible(false)
+    }
     return (
         <View style={styles.container}>
         <View style={styles.upcomingHeader}>
