@@ -20,7 +20,7 @@ const NearbyPlacesComponent = ({ route }) => {
         if (!cityName) {
           const { status } = await Location.requestForegroundPermissionsAsync();
           if (status !== 'granted') {
-            console.error('Permission to access location was denied');
+            console.error('Permission to access location was denied.');
             return;
           }
           location = await Location.getCurrentPositionAsync({});
