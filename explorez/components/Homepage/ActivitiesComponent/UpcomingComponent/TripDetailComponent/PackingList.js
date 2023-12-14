@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
-  flatList: {
+    flatList: {
     marginTop: 10,
     marginBottom: 20,
   },
@@ -125,16 +125,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },
+
   itemText: {
     flex: 1,
     fontSize: 16,
   },
+
   deleteButton: {
     marginLeft: 10,
     backgroundColor: 'red',
     padding: 8,
     borderRadius: 5,
   },
+  
   deleteButtonText: {
     color: 'white',
   },

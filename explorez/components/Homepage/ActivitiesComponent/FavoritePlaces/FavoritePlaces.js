@@ -26,7 +26,6 @@ const FavoritePlaces = () => {
         fetchData();
     }
     }, [isFocused])
-
     const deleteFavoritePlaces = async (id) => {
         try {
           await database.removeFavoritePlaces(id);
@@ -35,7 +34,6 @@ const FavoritePlaces = () => {
           console.error('Error deleting from Firestore:', error);
         }
       };
-    
       const handleDelete = (id, name) => {
         Alert.alert(
           'Confirm Deletion',

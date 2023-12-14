@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
         marginTop:20,
         paddingBottom:25,
     },
+    
     upcomingTxt:{
         fontFamily:'bai',
         fontSize:19,
@@ -33,12 +34,14 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         fontFamily: 'bai',
     },
+
     upcomingListStartDate:{
         fontSize: 12,
         fontFamily: 'bai',
         fontWeight: '100',
         marginBottom:5
     },
+
     upcomingHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',

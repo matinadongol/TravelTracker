@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         margin: 5,
         borderBottomWidth: 2, 
         borderBottomColor: '#000',
-        backgroundColor: '#fff'
+        backgroundColor: '#ffffff'
     },
     cityName: {
         fontSize: 25,
