@@ -124,7 +124,7 @@ const NewTrip = () => {
       }
     }
 
-    const apiKey = "AIzaSyCZwuGGoteEDb8WXpMycqaxczfSR1nuZyU";
+    const apiKey = Config.API_KEY_To_Get_ExchangeRate;
 
     const validateDestination = async (cityName) => {
       try {
@@ -169,7 +169,7 @@ const NewTrip = () => {
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="Start Date *"
-                    value={typeof startDate === 'string' ? startDate.toString() : ''}
+                    value={startDate.toString()}
                     style={Styles.inputText}
                     onFocus={showStartDatePicker}
                 />
@@ -184,7 +184,7 @@ const NewTrip = () => {
             <View style={Styles.inputContainer}>
                 <TextInput
                     placeholder="End Date"
-                    value={typeof endDate === 'string' ? endDate.toString() : ''}
+                    value={endDate.toString()}
                     style={Styles.inputText}
                     onFocus={showEndDatePicker}
                 />
