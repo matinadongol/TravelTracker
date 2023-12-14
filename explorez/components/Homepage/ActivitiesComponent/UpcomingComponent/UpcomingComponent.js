@@ -236,7 +236,7 @@ const UpcomingComponent = () => {
                 <Text style={styles.upcomingListStartDate}>{item.startDate}</Text>
               </View>
               <View style={styles.upcomingListButton}>
-                <Icon name="angle-right" size={30} color="#000" />
+                <Icon name="angle-right" size={30} color="#000"/>
               </View>
             </TouchableOpacity>
           )}
